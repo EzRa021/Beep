@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/auth/user', { withCredentials: true });
+        const response = await axios.get('https://beep-xi.vercel.app/api/auth/user', { withCredentials: true });
         setUser(response.data);
       } catch (error) {
         console.log(error);
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (fullName, username, email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', { fullName, username, email, password }, { withCredentials: true });
+      const response = await axios.post('https://beep-xi.vercel.app/api/auth/register', { fullName, username, email, password }, { withCredentials: true });
       setUser(response.data);
       alert('Registration successful');
       navigate('/login');
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password }, { withCredentials: true });
+      const response = await axios.post('https://beep-xi.vercel.app/api/auth/login', { email, password }, { withCredentials: true });
       setUser(response.data);
       alert('Login successful');
       navigate('/overview');
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
+      await axios.post('https://beep-xi.vercel.app/api/auth/logout', {}, { withCredentials: true });
       setUser(null);
       alert('Logout successful');
       navigate('/sign-in');
