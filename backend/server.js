@@ -23,5 +23,5 @@ app.use(cors({ origin: 'https://beep-xi.vercel.app/', credentials: true })); // 
 app.use('/api/auth', authRoutes);
 
 // Start the server
-const PORT = "https://beep-xi.vercel.app/";
+const PORT = "3000";
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
