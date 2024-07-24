@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const { signUp } = useContext(AuthContext);
@@ -134,7 +134,7 @@ const SignUp = () => {
                       </span>
                     </button>
                     <p className="text--body-3 registration-form__redirect">
-                      Already Have an Account? <a href="signin.html">Sign In</a>
+                      Already Have an Account? <Link to="/sign-in">Sign In</Link>
                     </p>
                   </form>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const { signIn } = useContext(AuthContext);
@@ -102,6 +102,7 @@ const SignIn = () => {
                         required
                       />
                     </div>
+
                     <button className="btn btn--lg w-100 registration-form__btns" type="submit">
                       Sign In
                       <span className="icon--right">
@@ -111,9 +112,11 @@ const SignIn = () => {
                         </svg>
                       </span>
                     </button>
-                    <p className="text--body-3 registration-form__redirect">
-                      Don't Have an Account? <a href="signup.html">Sign Up</a>
+                     <p className="text--body-3 registration-form__redirect">
+                      Don't Have an Account? <Link to="/sign-up"> Sign Up</Link>
                     </p>
+                    
+
                   </form>
                 </div>
               </div>
