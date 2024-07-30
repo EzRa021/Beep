@@ -1,446 +1,302 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
+import { AdContext } from '../context/AdContext';
+import { useNavigate } from 'react-router-dom';
+import DashNav from '../components/dashNav';
+import BreedCrumb from '../components/breedCrumb';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { toast } from 'react-toastify';
 
 const PostAds = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { createAd } = useContext(AdContext);
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false); // New state for loading
+  const [formData, setFormData] = useState({
+    adName: '',
+    category: '',
+    subcategory: '',
+    tags: '',
+    price: '',
+    description: '',
+    phoneNumber: '',
+    backupPhoneNumber: '',
+    email: '',
+    websiteLink: '',
+    location: '',
+    mapLocation: '',
+    overview: {
+      Conditions: '',
+      Brand: '',
+      Model: '',
+      ModelYear: '',
+      Authenticity: '',
+    }
+  });
+  const [features, setFeatures] = useState([]);
+  const [featureInput, setFeatureInput] = useState('');
+  const [images, setImages] = useState([]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleOverviewChange = (e) => {
+    setFormData({
+      ...formData,
+      overview: { ...formData.overview, [e.target.name]: e.target.value }
+    });
+  };
+
+  const handleFeatureChange = (e) => {
+    setFeatureInput(e.target.value);
+  };
+
+  const addFeature = () => {
+    if (featureInput) {
+      setFeatures([...features, featureInput]);
+      setFeatureInput('');
+    }
+  };
+
+  const removeFeature = (index) => {
+    setFeatures(features.filter((_, i) => i !== index));
+  };
+
+  const handleImageChange = (e) => {
+    setImages([...e.target.files]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true); // Set loading state to true
+    const adData = new FormData();
+    for (const key in formData) {
+      if (key === 'overview') {
+        for (const overviewKey in formData.overview) {
+          adData.append(`overview.${overviewKey}`, formData.overview[overviewKey]);
+        }
+      } else {
+        adData.append(key, formData[key]);
+      }
+    }
+    for (let i = 0; i < images.length; i++) {
+      adData.append('images', images[i]);
+    }
+    adData.append('features', features);
+
+    try {
+      await createAd(adData);
+      onOpen();
+      setLoading(false); // Set loading state to false after success
+    } catch (error) {
+      toast.error(error.message || 'An error occurred while posting the ad.');
+      setLoading(false); // Set loading state to false on error
+    }
+  };
+
+  const handleModalClose = () => {
+    onOpenChange(false);
+    navigate('/my-ads');
+  };
+
   return (
-    <div>
-   {/* // <!-- breedcrumb section start  --> */}
-        <section className="breedcrumb" style={{ 
-  background: "url('src/images/bg/bg-04.jpg') center center/cover no-repeat" 
-}}>
-            <div className="container">
-                <h2 className="breedcrumb__title text--heading-2">Overview</h2>
-                <ul className="breedcrumb__page">
-                    <li className="breedcrumb__page-item">
-                        <a href="index.html" className="breedcrumb__page-link text--body-3">Home</a>
-                    </li>
-                    <li className="breedcrumb__page-item">
-                        <a href="#" className="breedcrumb__page-link text--body-3">/</a>
-                    </li>
-                    <li className="breedcrumb__page-item">
-                        <a href="#" className="breedcrumb__page-link text--body-3">Dashboard</a>
-                    </li>
-                    <li className="breedcrumb__page-item">
-                        <a href="#" className="breedcrumb__page-link text--body-3">/</a>
-                    </li>
-                    <li className="breedcrumb__page-item">
-                        <a href="#" className="breedcrumb__page-link text--body-3">Post Ads</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        {/* <!-- breedcrumb section end  --> */}
-
-        {/* <!-- dashboard section start  --> */}
-        <section className="section dashboard">
-            <div className="container">
-                <div className="row">
-                    <div className="col-xl-3">
-                        <div className="dashboard__navigation">
-                            <div className="dashboard__navigation-top">
-                                <div className="dashboard__user-proifle">
-                                    <div className="dashboard__user-img">
-                                        <img src="/src/images/users/img-01.png" alt="user-photo" />
-                                    </div>
-                                    <div className="dashboard__user-info">
-                                        <h2 className="name text--body-2-600">Taiwo Olaoluwa</h2>
-                                        <p className="designation text--body-4">Member</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="dashboard__navigation-bottom">
-                                <ul className="dashboard__nav">
-                                    <li className="dashboard__nav-item">
-                                        <a href="dashboard.html" className="dashboard__nav-link">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M10 3H3V10H10V3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M21 3H14V10H21V3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M21 14H14V21H21V14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M10 14H3V21H10V14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
-                                            Overview
-                                        </a>
-                                    </li>
-                                    <li className="dashboard__nav-item">
-                                        <a href="post-ads.html" className="dashboard__nav-link active">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.6"
-                                                        stroke-miterlimit="10"
-                                                    />
-                                                    <path d="M8.25 12H15.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M12 8.25V15.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
-                                            Post ads
-                                        </a>
-                                    </li>
-                                    <li className="dashboard__nav-item">
-                                        <a href="myad.html" className="dashboard__nav-link">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M9 14.25H15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M9 11.25H15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path
-                                                        d="M15.0002 3.75H18.75C18.9489 3.75 19.1397 3.82902 19.2803 3.96967C19.421 4.11032 19.5 4.30109 19.5 4.5V20.25C19.5 20.4489 19.421 20.6397 19.2803 20.7803C19.1397 20.921 18.9489 21 18.75 21H5.25C5.05109 21 4.86032 20.921 4.71967 20.7803C4.57902 20.6397 4.5 20.4489 4.5 20.25V4.5C4.5 4.30109 4.57902 4.11032 4.71967 3.96967C4.86032 3.82902 5.05109 3.75 5.25 3.75H8.9998"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                    <path
-                                                        d="M8.25 6.75V6C8.25 5.00544 8.64509 4.05161 9.34835 3.34835C10.0516 2.64509 11.0054 2.25 12 2.25C12.9946 2.25 13.9484 2.64509 14.6517 3.34835C15.3549 4.05161 15.75 5.00544 15.75 6V6.75H8.25Z"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            My ads
-                                        </a>
-                                    </li>
-                                    {/* <li className="dashboard__nav-item"> */}
-                                        
-                                    <li className="dashboard__nav-item">
-                                        <a href="account-setting.html" className="dashboard__nav-link">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                    <path
-                                                        d="M11.5193 4.13952L9.75029 2.81315C9.65538 2.74175 9.54485 2.69393 9.42783 2.67363C9.3108 2.65332 9.19063 2.66112 9.07721 2.69638C8.52933 2.86794 7.99778 3.08787 7.48884 3.35355C7.38349 3.40881 7.29279 3.48834 7.22422 3.58556C7.15566 3.68278 7.1112 3.79492 7.09452 3.91271L6.78179 6.10186C6.66259 6.20753 6.54589 6.31742 6.43169 6.43156C6.31752 6.54573 6.2076 6.66246 6.10191 6.78176L6.10186 6.78179L3.9131 7.09479C3.7955 7.11142 3.68353 7.15576 3.58642 7.22415C3.48932 7.29254 3.40986 7.38303 3.35459 7.48816C3.08849 7.99689 2.86814 8.52826 2.69613 9.076C2.66071 9.18957 2.65281 9.30994 2.67307 9.42717C2.69334 9.5444 2.7412 9.65513 2.81269 9.75022L4.13952 11.5193C4.12995 11.6783 4.12514 11.8385 4.12509 12C4.12509 12.1614 4.1299 12.3217 4.13953 12.4808L4.13952 12.4809L2.81315 14.2499C2.74175 14.3448 2.69393 14.4553 2.67363 14.5723C2.65332 14.6894 2.66112 14.8095 2.69638 14.923C2.86794 15.4708 3.08787 16.0024 3.35355 16.5113C3.40881 16.6167 3.48834 16.7074 3.58556 16.776C3.68278 16.8445 3.79492 16.889 3.91271 16.9057L6.10186 17.2184C6.20752 17.3376 6.31742 17.4543 6.43156 17.5685C6.54572 17.6827 6.66245 17.7926 6.78175 17.8983L6.78179 17.8983L7.09479 20.0871C7.11142 20.2047 7.15575 20.3167 7.22415 20.4138C7.29254 20.5109 7.38303 20.5903 7.48816 20.6456C7.99688 20.9117 8.52825 21.132 9.07599 21.304C9.18957 21.3395 9.30994 21.3474 9.42716 21.3271C9.54439 21.3068 9.65512 21.259 9.75021 21.1875L11.5193 19.8607C11.6783 19.8702 11.8385 19.875 12 19.8751C12.1614 19.8751 12.3217 19.8703 12.4808 19.8607L12.4809 19.8607L14.2499 21.187C14.3448 21.2584 14.4553 21.3063 14.5723 21.3266C14.6894 21.3469 14.8095 21.3391 14.923 21.3038C15.4708 21.1322 16.0024 20.9123 16.5113 20.6466C16.6167 20.5914 16.7074 20.5118 16.776 20.4146C16.8445 20.3174 16.889 20.2053 16.9057 20.0875L17.2184 17.8983C17.3376 17.7927 17.4543 17.6828 17.5685 17.5686C17.6827 17.4545 17.7926 17.3377 17.8983 17.2184L17.8983 17.2184L20.0871 16.9054C20.2047 16.8888 20.3167 16.8444 20.4138 16.776C20.5109 16.7076 20.5903 16.6172 20.6456 16.512C20.9117 16.0033 21.132 15.4719 21.304 14.9242C21.3395 14.8106 21.3474 14.6902 21.3271 14.573C21.3068 14.4558 21.259 14.3451 21.1875 14.25L19.8607 12.4809C19.8702 12.3219 19.875 12.1616 19.8751 12.0002C19.8751 11.8387 19.8703 11.6785 19.8607 11.5194L19.8607 11.5193L21.187 9.75029C21.2584 9.65538 21.3063 9.54485 21.3266 9.42783C21.3469 9.3108 21.3391 9.19063 21.3038 9.07721C21.1322 8.52933 20.9123 7.99778 20.6466 7.48884C20.5914 7.38349 20.5118 7.29279 20.4146 7.22422C20.3174 7.15566 20.2053 7.1112 20.0875 7.09452L17.8983 6.78179C17.7927 6.66259 17.6828 6.54589 17.5686 6.43169C17.4545 6.31752 17.3377 6.2076 17.2184 6.10191L17.2184 6.10186L16.9054 3.9131C16.8888 3.7955 16.8444 3.68353 16.776 3.58642C16.7076 3.48932 16.6172 3.40986 16.512 3.35459C16.0033 3.08849 15.4719 2.86814 14.9242 2.69613C14.8106 2.66071 14.6902 2.65281 14.573 2.67307C14.4558 2.69334 14.3451 2.7412 14.25 2.81269L12.4809 4.13952C12.3219 4.12995 12.1616 4.12514 12.0002 4.12509C11.8387 4.12509 11.6785 4.1299 11.5194 4.13953L11.5193 4.13952Z"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            Account Settings
-                                        </a>
-                                    </li>
-                                    <li className="dashboard__nav-item">
-                                        <a href="#" className="dashboard__nav-link">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M16.3135 8.0625L20.2499 12L16.3135 15.9375" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M9.75 12H20.2472" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path
-                                                        d="M9.75 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V4.5C3.75 4.30109 3.82902 4.11032 3.96967 3.96967C4.11032 3.82902 4.30109 3.75 4.5 3.75H9.75"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            Sign Out
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <span className="dashboard__navigation-toggle-btn">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M19.5 13.5H4.5C4.08579 13.5 3.75 13.8358 3.75 14.25V18C3.75 18.4142 4.08579 18.75 4.5 18.75H19.5C19.9142 18.75 20.25 18.4142 20.25 18V14.25C20.25 13.8358 19.9142 13.5 19.5 13.5Z"
-                                        stroke="currentColor"
-                                        stroke-width="1.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                    <path
-                                        d="M19.5 5.25H4.5C4.08579 5.25 3.75 5.58579 3.75 6V9.75C3.75 10.1642 4.08579 10.5 4.5 10.5H19.5C19.9142 10.5 20.25 10.1642 20.25 9.75V6C20.25 5.58579 19.9142 5.25 19.5 5.25Z"
-                                        stroke="currentColor"
-                                        stroke-width="1.6"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
-                            </span>
-                        </div>
+    <div className="min-h-screen bg-gray-100">
+      <BreedCrumb pageTitle="Post Ads" currentPage="post-ads" />
+      <section className="py-8">
+        <div className="container mx-auto flex">
+          <DashNav />
+          <div className="w-full lg:w-3/4 px-4">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              {step === 1 && (
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Step 1: Basic Info</h3>
+                  <form onSubmit={(e) => { e.preventDefault(); setStep(2); }}>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="adName">Ad Name</label>
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="adName" id="adName" value={formData.adName} onChange={handleChange} />
                     </div>
-                    <div className="col-xl-9">
-                        <div className="dashboard-post">
-                            <ul className="nav dashboard-post__nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li className="nav-item dashboard-post__item" role="presentation">
-                                    <div className="nav-link dashboard-post__link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic" role="tab" aria-controls="pills-basic" aria-selected="true">
-                                        <span className="icon icon--default">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.5 9.75L12 15.75L22.5 9.75L12 3.75L1.5 9.75Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M1.5 13.5L12 19.5L22.5 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span className="icon icon--success">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M20.25 6.75L9.75 17.2495L4.5 12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-
-                                        <div className="step-info">
-                                            <h2 className="text--body-3-600">Steps 01</h2>
-                                            <p className="text--body-4">Basic ad info</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="nav-item dashboard-post__item" role="presentation">
-                                    <div className="nav-link dashboard-post__link" id="pills-advance-tab" data-bs-toggle="pill" data-bs-target="#pills-advance" role="tab" aria-controls="pills-advance" aria-selected="false">
-                                        <span className="icon icon--default">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 16.5L12 21.75L21 16.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M3 12L12 17.25L21 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M3 7.5L12 12.75L21 7.5L12 2.25L3 7.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span className="icon icon--success">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M20.25 6.75L9.75 17.2495L4.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <div className="step-info">
-                                            <h2 className="text--body-3-600">Steps 02</h2>
-                                            <p className="text--body-4">Description, Features & Images</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="nav-item dashboard-post__item" role="presentation">
-                                    <div className="nav-link dashboard-post__link" id="pills-post-tab" data-bs-toggle="pill" data-bs-target="#pills-post" role="tab" aria-controls="pills-post" aria-selected="false">
-                                        <span className="icon icon--default">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M13.5 21H10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M11.5283 1.85314C9.74778 3.27947 3.79242 8.979 8.99983 18.0004H14.9998C20.099 8.98539 14.2307 3.28753 12.4688 1.85618C12.3361 1.74822 12.1703 1.68903 11.9991 1.68848C11.828 1.68793 11.6618 1.74604 11.5283 1.85314V1.85314Z"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M6.92492 10.4404L3.98585 13.9673C3.91243 14.0554 3.8602 14.1592 3.83316 14.2706C3.80612 14.3821 3.80499 14.4982 3.82987 14.6102L4.98889 19.8258C5.01652 19.9501 5.07536 20.0653 5.15985 20.1606C5.24435 20.2559 5.35172 20.3281 5.47184 20.3705C5.59197 20.4128 5.72089 20.4238 5.84646 20.4025C5.97203 20.3812 6.0901 20.3283 6.18956 20.2487L8.99993 18.0004"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M17.0186 10.3721L20.0141 13.9667C20.0875 14.0548 20.1397 14.1585 20.1668 14.27C20.1938 14.3814 20.1949 14.4976 20.1701 14.6095L19.011 19.8251C18.9834 19.9495 18.9246 20.0647 18.8401 20.16C18.7556 20.2553 18.6482 20.3275 18.5281 20.3698C18.408 20.4121 18.279 20.4232 18.1535 20.4019C18.0279 20.3806 17.9098 20.3276 17.8104 20.2481L15 17.9998"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M12 10.125C12.6213 10.125 13.125 9.62132 13.125 9C13.125 8.37868 12.6213 7.875 12 7.875C11.3787 7.875 10.875 8.37868 10.875 9C10.875 9.62132 11.3787 10.125 12 10.125Z"
-                                                    fill="currentColor"
-                                                />
-                                            </svg>
-                                        </span>
-                                        <span className="icon icon--success">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M20.25 6.75L9.75 17.2495L4.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <div className="step-info">
-                                            <h2 className="text--body-3-600">Steps 03</h2>
-                                            <p className="text--body-4">Post Ads</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div className="tab-content dashboard-post__content" id="pills-tabContent">
-                                {/* <!-- Step 01 --> */}
-                                <div className="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
-                                    <div className="dashboard-post__information step-information">
-                                        <form action="#">
-                                            <div className="dashboard-post__information-form">
-                                                <div className="input-field">
-                                                    <label for="adname"> Ad Name</label>
-                                                    <input type="text" placeholder="Ad name" id="adname" />
-                                                </div>
-                                                <div className="input-field__group">
-                                                    
-                                                    <div className="input-select">
-                                                        <label for="cat">Category</label>
-                                                        <select className="js-example-basic-single w-100" id="cat" name="category">
-                                                            <option value="01">Choose ads category</option>
-                                                            <option value="02">product</option>
-                                                            <option value="03">services</option>
-                                                            <option value="04">others</option>
-                                                          </select>
-                                                    </div>
-                                                    <div className="input-select">
-                                                        <label for="subcategory">sub category</label>
-                                                        <select className="js-example-basic-single w-100" id="subcat" name="subcategory">
-                                                            <option value="01">Choose sub category</option>
-                                                            <option value="02">Phones & Gadgets</option>
-                                                            <option value="03">Uber services</option>
-                                                            <option value="04">Real estate</option>
-                                                            <option value="05">Basic needs</option>
-                                                            <option value="06">others</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div className="input-field">
-                                                    <label for="tag"> Tags </label>
-                                                    <input type="text" placeholder="Ad Tag..." id="tag" />
-                                                </div>
-                                                </div>
-                                        </form>
-                                        <div className="dashboard-post__action-btns">
-                                            <a href="#" className="btn btn--lg btn--outline">
-                                                View Posting Rules
-                                            </a>
-                                            <a href="#" className="btn btn--lg">
-                                                Next Steps
-                                                <span className="icon--right">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M3.75 12H20.25" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <!-- Step 02 --> */}
-                                <div className="tab-pane fade" id="pills-advance" role="tabpanel" aria-labelledby="pills-advance-tab">
-                                    <div className="dashboard-post__step02 step-information">
-                                        <div className="input-field--textarea">
-                                            <label for="description">Ad description</label>
-                                            <textarea placeholder="What’s your thought..." id="description"></textarea>
-                                        </div>
-                                        <div className="input-field--textarea">
-                                            <label for="feature">Feature <span>(optional)</span> </label>
-                                            <textarea placeholder="Write a feature in each line..." id="feature"></textarea>
-                                        </div>
-                                        <div className="upload-wrapper">
-                                            <h3>Upload Photos</h3>
-                                            <div className="upload-area">
-                                                <div className="uploaded-items">
-                                                    <div className="uploaded-item">
-                                                        <img src="/src/images/blogs/img-02.png" alt=""/>
-                                                        <div className="remove-icon">
-                                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" className="css-i6dzq1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                        </div>
-                                                    </div>
-                                                    <div className="uploaded-item">
-                                                        <img src="/src/images/blogs/img-03.png" alt=""/>
-                                                        <div className="remove-icon">
-                                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" className="css-i6dzq1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="add-new">
-                                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" className="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                                                    <input type="file" hidden id="addNew"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="dashboard-post__action-btns">
-                                            <a href="#" className="btn btn--lg btn--outline">
-                                                Previous
-                                            </a>
-                                            <a href="#" className="btn btn--lg">
-                                                Next Steps
-                                                <span className="icon--right">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M3.75 12H20.25" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <!-- Steop 03 --> */}
-                                <div className="tab-pane fade" id="pills-post" role="tabpanel" aria-labelledby="pills-post-tab">
-                                    <div className="dashboard-post__ads step-information">
-                                        <form action="#">
-                                            <div className="input-field__group">
-                                                <div className="input-field">
-                                                    <label for="phoneNumber">phone Number</label>
-                                                    <input type="tel" className="telephone" placeholder="Phone" id="phoneNumber" />
-                                                </div>
-                                                <div className="input-field">
-                                                    <label for="backupPhone">Backup phone Number <span>(optional)</span> </label>
-                                                    <input type="tel" className="backupPhone" placeholder="Phone Number" />
-                                                </div>
-                                            </div>
-                                            <div className="input-field__group">
-                                                <div className="input-field">
-                                                    <label for="email">Email address</label>
-                                                    <input type="text" placeholder="Email Address" id="email" />
-                                                </div>
-                                                <div className="input-field">
-                                                    <label for="website">Website Link <span>(optional)</span></label>
-                                                    <input type="text" placeholder="your website url" id="website" />
-                                                </div>
-                                            </div>
-                                           
-                                            <div className="input-field__group">
-                                                <div className="input-field">
-                                                    <label for="location">location</label>
-                                                    <input type="text" placeholder="Your location" id="location" />
-                                                </div>
-                                                <div className="input-field">
-                                                    <label for="maploc">Map location <span>(optional)</span></label>
-                                                    <input type="text" placeholder="map Location" id="maploc" />
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <div className="dashboard-post__ads-bottom">
-                                            <div className="form-check">
-                                                <input type="checkbox" className="form-check-input" id="savecontact" />
-                                                <label className="form-check-label" for="savecontact">Save my contact information for faster posting </label>
-                                            </div>
-
-                                            <div className="dashboard-post__action-btns">
-                                                <a href="#" className="btn btn--lg btn--outline">
-                                                    Previous
-                                                </a>
-                                                <a href="post-ad-success.html" className="btn btn--lg">
-                                                    Post Ads
-                                                    <span className="icon--right">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M3.75 12H20.25" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="category">Category</label>
+                      <select className="w-full px-3 py-2 border rounded" id="category" name="category" value={formData.category} onChange={handleChange}>
+                        <option value="">Choose ads category</option>
+                        <option value="Product">Product</option>
+                        <option value="Service">Services</option>
+                        <option value="Other">Others</option>
+                      </select>
                     </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="subcategory">Sub Category</label>
+                      <select className="w-full px-3 py-2 border rounded" id="subcategory" name="subcategory" value={formData.subcategory} onChange={handleChange}>
+                        <option value="">Choose sub category</option>
+                        <option value="Phones and gadgets">Phones & Gadgets</option>
+                        <option value="Stationaries">Stationaries</option>
+                        <option value="Dry cleaning">Dry cleaning</option>
+                        <option value="Barbing">Barbing</option>
+                        <option value="Hair stylist">Hair stylist</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
+                    {formData.subcategory === 'Phones and gadgets' && (
+                      <div>
+                        <h4 className="text-lg font-semibold mb-2">Overview Details</h4>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2" htmlFor="Conditions">Conditions</label>
+                          <input className="w-full px-3 py-2 border rounded" type="text" name="Conditions" id="Conditions" value={formData.overview.Conditions} onChange={handleOverviewChange} />
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2" htmlFor="Brand">Brand</label>
+                          <input className="w-full px-3 py-2 border rounded" type="text" name="Brand" id="Brand" value={formData.overview.Brand} onChange={handleOverviewChange} />
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2" htmlFor="Model">Model</label>
+                          <input className="w-full px-3 py-2 border rounded" type="text" name="Model" id="Model" value={formData.overview.Model} onChange={handleOverviewChange} />
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2" htmlFor="ModelYear">Model Year</label>
+                          <input className="w-full px-3 py-2 border rounded" type="text" name="ModelYear" id="ModelYear" value={formData.overview.ModelYear} onChange={handleOverviewChange} />
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700 mb-2" htmlFor="Authenticity">Authenticity</label>
+                          <input className="w-full px-3 py-2 border rounded" type="text" name="Authenticity" id="Authenticity" value={formData.overview.Authenticity} onChange={handleOverviewChange} />
+                        </div>
+                      </div>
+                    )}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="tags">Tags</label>
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="tags" id="tags" value={formData.tags} onChange={handleChange} />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="price">Price</label>
+                      <input className="w-full px-3 py-2 border rounded" type="number" name="price" id="price" value={formData.price} onChange={handleChange} />
+                    </div>
+                    <div className="flex justify-between">
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Next Step</button>
+                    </div>
+                  </form>
                 </div>
+              )}
+              {step === 2 && (
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Step 2: Description and Images</h3>
+                  <form onSubmit={(e) => { e.preventDefault(); setStep(3); }}>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="description">Ad Description</label>
+                      <textarea className="w-full px-3 py-2 border rounded" name="description" id="description" value={formData.description} onChange={handleChange}></textarea>
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="features">Features <span className="text-gray-500">(optional)</span></label>
+                      <div className="flex">
+                        <input className="w-full px-3 py-2 border rounded" type="text" name="feature" id="feature" value={featureInput} onChange={handleFeatureChange} />
+                        <button type="button" className="px-4 py-2 bg-blue-500 text-white rounded ml-2 hover:bg-blue-600" onClick={addFeature}>Add</button>
+                      </div>
+                      <div className="mt-2">
+                        {features.map((feature, index) => (
+                          <div key={index} className="flex items-center">
+                            <span className="text-gray-700">{feature}</span>
+                            <button className="ml-2 text-red-500" onClick={() => removeFeature(index)}>Remove</button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2">Upload Photos</label>
+                      <input type="file" multiple onChange={handleImageChange} />
+                      <div className="flex flex-wrap mt-4">
+                        {Array.from(images).map((image, index) => (
+                          <div key={index} className="relative w-24 h-24 mr-2 mb-2">
+                            <img src={URL.createObjectURL(image)} alt="Uploaded" className="w-full h-full object-cover rounded" />
+                            <button className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full" onClick={() => setImages(Array.from(images).filter((_, i) => i !== index))}>
+                              &times;
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(1)}>Previous</button>
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(3)}>Next Step</button>
+                    </div>
+                  </form>
+                </div>
+              )}
+              {step === 3 && (
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Step 3: Contact Information</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="phoneNumber">Phone Number</label>
+                      <input className="w-full px-3 py-2 border rounded" type="tel" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="backupPhoneNumber">Backup Phone Number <span className="text-gray-500">(optional)</span></label>
+                      <input className="w-full px-3 py-2 border rounded" type="tel" name="backupPhoneNumber" id="backupPhoneNumber" value={formData.backupPhoneNumber} onChange={handleChange} />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="email">Email Address</label>
+                      <input className="w-full px-3 py-2 border rounded" type="email" name="email" id="email" value={formData.email} onChange={handleChange} />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="websiteLink">Website Link <span className="text-gray-500">(optional)</span></label>
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="websiteLink" id="websiteLink" value={formData.websiteLink} onChange={handleChange} />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="location">Location</label>
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="location" id="location" value={formData.location} onChange={handleChange} />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="mapLocation">Map Location <span className="text-gray-500">(optional)</span></label>
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="mapLocation" id="mapLocation" value={formData.mapLocation} onChange={handleChange} />
+                    </div>
+                    <div className="flex items-center mb-4">
+                      <input type="checkbox" className="mr-2" id="saveContact" />
+                      <label htmlFor="saveContact" className="text-gray-700">Save my contact information for faster posting</label>
+                    </div>
+                    <div className="flex justify-between">
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Previous</button>
+                      <button type="submit" className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={loading}>
+                        {loading ? (
+                          <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                          </svg>
+                        ) : 'Post Ad'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
             </div>
-        </section>
-   
-        <button className="scrollTop scrollTop--white" >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 20.25V3.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M5.25 10.5L12 3.75L18.75 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </button>
-
-
-
+          </div>
+        </div>
+      </section>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Ad Posted Successfully</ModalHeader>
+              <ModalBody>
+                <div className="text-center">
+                  <div className="mb-4">
+                    <svg className="w-20 h-20 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7 17h10M7 10h.01M3 6h18" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-bold">Your ad has been successfully posted!</h2>
+                  <p className="text-gray-600">Congratulations! Your ad is now live and visible to your target audience.</p>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={handleModalClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default PostAds
-     
+export default PostAds;

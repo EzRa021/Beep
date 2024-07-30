@@ -1,6 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useContext, useState, useEffect } from 'react';
+import { AdContext } from '../context/AdContext';
 
 const Home = () => {
+    const { allAds, loading } = useContext(AdContext);
     return (
         <>
             {/* <!-- header section end   -->
@@ -62,7 +66,7 @@ const Home = () => {
                                 <div className="search__content-item">
                                     <div className="input-field input-field--transparent">
                                         <select name="category" className="js-example-basic-single w-100">
-                                            <option value="null"  style={{ display: "none" }}>Select Category</option>
+                                            <option value="null" style={{ display: "none" }}>Select Category</option>
                                             <option value="1">Laptops</option>
                                             <option value="2">Phones</option>
                                             <option value="3">Electronics</option>
@@ -131,7 +135,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Phones and Basic gadgets</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +143,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +165,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Computer Services</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +173,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +217,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Uber services</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -221,7 +225,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +273,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Real Estate & Accomodations</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -277,7 +281,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -297,7 +301,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Basic School Essentials</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -305,7 +309,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +337,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Home & Living</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">40+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -341,7 +345,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -384,7 +388,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Nearest Services</h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/ad-list" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -392,7 +396,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -414,7 +418,7 @@ const Home = () => {
                                 <h5 className="text--body-2 category-card__title">Education </h5>
                                 <div className="category-card__view">
                                     <span className="first view-number">50+ Ads</span>
-                                    <a href="marketplace.html" className="second view-btn">
+                                    <Link to="/market-place" className="second view-btn">
                                         View Ads
                                         <span className="icon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -422,7 +426,7 @@ const Home = () => {
                                                 <path d="M14 5.25L20.75 12L14 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -432,392 +436,69 @@ const Home = () => {
             {/* <!-- Poupular category Section end   -->
 
     <!-- recent-post section start  --> */}
-            <section className="section recent-post">
-                <div className="container">
-                    <h2 className="text--heading-1 section__title">Our Popular Ads</h2>
-                    <div className="row">
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one cards--highlight">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-34.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-
-                                        </h6>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title">My name is Godwin, a postgraduate student of UI i teach all MAT tutorial.</a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Agbowo
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-28.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Basic Services
-                                        </h6>
-                                        {/* <a href="ad-details.html" className="text--body-3-600 cards__caption-title"></a><b>300l chemistry student ProfessionalFashion Designer</b></a> */}
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Sultan Bello Hall
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-41.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Services
-                                        </h6>
-                                        <a href="market.html" className="text--body-3-600 cards__caption-title">Printing Services</a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Geology Department
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-17.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Fast food
-                                        </h6>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title"><b> Klazz restraunt home of good & fast food</b></a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Klazz Restaurant
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one cards--highlight">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-43.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Phone repair
-                                        </h6>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title">Hello! I'm a phone Engineer </a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            UI- Mellanby Hall
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-10.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Second hand itel A70
-                                        </h6>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title"><b>itel A70 for sale at cheap price.</b></a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Idia Hall
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-40.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Services
-                                        </h6>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title">Virtual assistant</a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            University of Ibadan
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="cards cards--one">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-35.png" alt="card-img" className="img-fluid" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-4 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Basic School Essentials
-                                        </h6>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title"> I sell different organic Hair cream</a>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <h6 className="cards__location text--body-4">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Agbowo shopping complex
-                                        </h6>
-                                        <span className="cards__price-title text--body-3-600"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            
+    <section className="section recent-post">
+      <div className="container">
+        <h2 className="text--heading-1 section__title">Our Popular Ads</h2>
+        <div className="row">
+          {loading ? (
+            <div className=' flex justify-center items-center '>njciyvcuvhvcjhvhvajhvhvhavh<svg class="animate-spin text-blue-300 h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+            
+          </svg></div> // You can replace this with a spinner or a loading component
+          ) : (
+            allAds?.slice(0, 12).map((ad) => (
+              <div className="col-xl-3 col-md-6" key={ad._id}>
+                <div className="cards cards--one cards--highlight">
+                  <Link to={`single-ad/${ad._id}`} className="cards__img-wrapper">
+                    <img src={ad.images[0]} alt="card-img" className="img-fluid" />
+                  </Link>
+                  <div className="cards__info">
+                    <div className="cards__info-top">
+                      <h6 className="text--body-4 cards__category-title">
+                        <span className="icon">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 11L8 14.5L14 11" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+                            <path d="M2 8L8 11.5L14 8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+                            <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+                          </svg>
+                        </span>
+                      </h6>
+                      <Link to="/market-place" className="text--body-3-600 cards__caption-title">
+                        {ad.adName}
+                      </Link>
                     </div>
-                    <div className="recent-post__btn">
-                        <a href="marketplace.html" className="btn">
-                            View All
-                            <span className="icon--right">
-                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.25 12H20.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M14 5.25L20.75 12L14 18.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
-                        </a>
+                    <div className="cards__info-bottom">
+                      <h6 className="cards__location text--body-4">
+                        <span className="icon">
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
+                              stroke="#27C200"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>
+                            <path
+                              d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
+                              stroke="#27C200"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>
+                          </svg>
+                        </span>
+                        {ad.location}
+                      </h6>
+                      <span className="cards__price-title text--body-3-600">{ad.price}</span>
                     </div>
+                  </div>
                 </div>
-            </section>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </section>
             {/* // <!-- recent-post section end -->
 
     // <!-- work section start  --> */}
@@ -851,7 +532,7 @@ const Home = () => {
                                 <span className="work-card__count-number">
                                     01
                                 </span>
-                                <h2 className="work-card__title text--body-1"style={{ textAlign: "justify" }}>Create Account</h2>
+                                <h2 className="work-card__title text--body-1" style={{ textAlign: "justify" }}>Create Account</h2>
                                 <p className="work-card__description text--body-3">Everything you ever needed in one place                           </p>
                             </div>
                         </div>
@@ -881,7 +562,7 @@ const Home = () => {
                                 <span className="work-card__count-number">
                                     02
                                 </span>
-                                <h2 className="work-card__title text--body-1"style={{ textAlign: "justify" }}>Post Ads</h2>
+                                <h2 className="work-card__title text--body-1" style={{ textAlign: "justify" }}>Post Ads</h2>
                                 <p className="work-card__description text--body-3">Reach thousands of potential buyers quickly and easily by posting your ads on our marketplace</p>
                             </div>
                         </div>
@@ -909,588 +590,13 @@ const Home = () => {
                                 <span className="work-card__count-number">
                                     03
                                 </span>
-                                <h2 className="work-card__title text --body-1"style={{ textAlign: "justify" }}>Start Earning</h2>
+                                <h2 className="work-card__title text --body-1" style={{ textAlign: "justify" }}>Start Earning</h2>
                                 <p className="work-card__description text--body-3">Turn your items into income effortlessly! Join our marketplace and start earning today. List your products, reach a global audience, and watch the sales roll in.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            {/* // <!-- work section end -->
-
-    // <!-- feature section start  --> */}
-            <section className="section feature-ads">
-                <div className="container">
-                    <h2 className="text--heading-1 section__title">Newest Ads</h2>
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <div className="cards cards--two cards--highlight">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-38.png" alt="card-img" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <div className="text--body-3 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 10L10 14.375L17.5 10" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Services
-                                            <div className="tag-label tag-label--member">
-                                                <span className="icon">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="16" height="16" rx="8" fill="#FF4F4F" />
-                                                        <path
-                                                            d="M8.17231 10.4505L10.1424 11.6987C10.3943 11.8582 10.7069 11.6209 10.6322 11.327L10.063 9.08782C10.047 9.02546 10.0489 8.95983 10.0685 8.8985C10.0881 8.83716 10.1246 8.78261 10.1738 8.74111L11.9405 7.27066C12.1727 7.07745 12.0529 6.69219 11.7546 6.67284L9.44743 6.5231C9.38528 6.51866 9.32568 6.49666 9.27556 6.45966C9.22543 6.42265 9.18685 6.37217 9.16431 6.31409L8.30382 4.14718C8.28043 4.08553 8.23884 4.03246 8.18458 3.99501C8.13031 3.95756 8.06594 3.9375 8 3.9375C7.93407 3.9375 7.86969 3.95756 7.81543 3.99501C7.76116 4.03246 7.71957 4.08553 7.69618 4.14718L6.8357 6.31409C6.81315 6.37217 6.77457 6.42265 6.72445 6.45966C6.67432 6.49666 6.61472 6.51866 6.55258 6.5231L4.24539 6.67284C3.94715 6.69219 3.82733 7.07745 4.05947 7.27066L5.82616 8.74111C5.87539 8.78261 5.91192 8.83716 5.93152 8.8985C5.95113 8.95983 5.95303 9.02546 5.937 9.08782L5.40912 11.1644C5.31944 11.5171 5.69465 11.8019 5.99685 11.6104L7.82769 10.4505C7.87919 10.4177 7.93896 10.4003 8 10.4003C8.06104 10.4003 8.12082 10.4177 8.17231 10.4505Z"
-                                                            fill="white"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                                Member
-                                            </div>
-                                            <div className="tag-label tag-label--feature">
-                                                Featured
-                                            </div>
-                                        </div>
-                                        <a href="marketplace.html" className="text--body-3-600 cards__caption-title">Professional hair stylist </a>
-
-                                        <div className="cards__user-details">
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 username">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 10C10.2091 10 12 8.20914 12 6C12 3.79086 10.2091 2 8 2C5.79086 2 4 3.79086 4 6C4 8.20914 5.79086 10 8 10Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path
-                                                                d="M1.93652 13.4994C2.55125 12.4354 3.43516 11.5519 4.49945 10.9376C5.56375 10.3234 6.77095 9.99999 7.99978 10C9.22862 10 10.4358 10.3234 11.5001 10.9377C12.5644 11.552 13.4483 12.4355 14.063 13.4995"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                            <path
-                                                                d="M13 6.5C13 11 8 14.5 8 14.5C8 14.5 3 11 3 6.5C3 5.17392 3.52678 3.90215 4.46447 2.96447C5.40215 2.02678 6.67392 1.5 8 1.5C9.32608 1.5 10.5979 2.02678 11.5355 2.96447C12.4732 3.90215 13 5.17392 13 6.5V6.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Mellanby Hall                                            </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path d="M8 4.5V8H11.5" stroke="#939AAD" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <span className="cards__price-title text--body-2"></span>
-                                        <button className="btn-icon">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.62519 7.49826 3.01561 6.40635 3.72989 5.53493C4.44416 4.66351 5.4382 4.06636 6.54299 3.84501C7.64778 3.62367 8.79514 3.79179 9.78999 4.32079C10.7848 4.84979 11.5658 5.70702 12 6.74673L12 6.74673C12.4342 5.70702 13.2152 4.84979 14.21 4.32079C15.2049 3.79179 16.3522 3.62367 17.457 3.84501C18.5618 4.06636 19.5558 4.66351 20.2701 5.53493C20.9844 6.40635 21.3748 7.49826 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
-                                                        stroke="#00AAFF"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="cards cards--two cards--highlight">
-                                <a href="marketplace.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-21.png" alt="card-img" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-3 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 10L10 14.375L17.5 10" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Electronics
-                                            <div className="tag-label tag-label--member">
-                                                <span className="icon">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="16" height="16" rx="8" fill="#FF4F4F" />
-                                                        <path d="M8.17231 10.4505L10.1424 11.6987C10.3943 11.8582 10.7069 11.6209 10.6322 11.327L10.063 9.08782C10.047 9.02546 10.0489 8.95983 10.0685 8.8985C10.0881 8.83716 10.1246 8.78261 10.1738 8.74111L11.9405 7.27066C12.1727 7.07745 12.0529 6.69219 11.7546 6.67284L9.44743 6.5231C9.38528 6.51866 9.32568 6.49666 9.27556 6.45966C9.22543 6.42265 9.18685 6.37217 9.16431 6.31409L8.30382 4.14718C8.28043 4.08553 8.23884 4.03246 8.18458 3.99501C8.13031 3.95756 8.06594 3.9375 8 3.9375C7.93407 3.9375 7.86969 3.95756 7.81543 3.99501C7.76116 4.03246 7.71957 4.08553 7.69618 4.14718L6.8357 6.31409C6.81315 6.37217 6.77457 6.42265 6.72445 6.45966C6.67432 6.49666 6.61472 6.51866 6.55258 6.5231L4.24539 6.67284C3.94715 6.69219 3.82733 7.07745 4.05947 7.27066L5.82616 8.74111C5.87539 8.78261 5.91192 8.83716 5.93152 8.8985C5.95113 8.95983 5.95303 9.02546 5.937 9.08782L5.40912 11.1644C5.31944 11.5171 5.69465 11.8019 5.99685 11.6104L7.82769 10.4505C7.87919 10.4177 7.93896 10.4003 8 10.4003C8.06104 10.4003 8.12082 10.4177 8.17231 10.4505Z" fill="white" />
-                                                    </svg>
-
-                                                </span>
-                                                Member
-                                            </div>
-                                            <div className="tag-label tag-label--feature">
-                                                Featured
-                                            </div>
-                                        </h6>
-                                        <a href="#" className="text--body-3-600 cards__caption-title"> Refill your gas at a very affordable price.</a>
-
-                                        <div className="cards__user-details">
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 username">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 10C10.2091 10 12 8.20914 12 6C12 3.79086 10.2091 2 8 2C5.79086 2 4 3.79086 4 6C4 8.20914 5.79086 10 8 10Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path
-                                                                d="M1.93652 13.4994C2.55125 12.4354 3.43516 11.5519 4.49945 10.9376C5.56375 10.3234 6.77095 9.99999 7.99978 10C9.22862 10 10.4358 10.3234 11.5001 10.9377C12.5644 11.552 13.4483 12.4355 14.063 13.4995"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                            <path
-                                                                d="M13 6.5C13 11 8 14.5 8 14.5C8 14.5 3 11 3 6.5C3 5.17392 3.52678 3.90215 4.46447 2.96447C5.40215 2.02678 6.67392 1.5 8 1.5C9.32608 1.5 10.5979 2.02678 11.5355 2.96447C12.4732 3.90215 13 5.17392 13 6.5V6.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Abadina Road.
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path d="M8 4.5V8H11.5" stroke="#939AAD" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <span className="cards__price-title text--body-2"></span>
-                                        <button className="btn-icon">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.62519 7.49826 3.01561 6.40635 3.72989 5.53493C4.44416 4.66351 5.4382 4.06636 6.54299 3.84501C7.64778 3.62367 8.79514 3.79179 9.78999 4.32079C10.7848 4.84979 11.5658 5.70702 12 6.74673L12 6.74673C12.4342 5.70702 13.2152 4.84979 14.21 4.32079C15.2049 3.79179 16.3522 3.62367 17.457 3.84501C18.5618 4.06636 19.5558 4.66351 20.2701 5.53493C20.9844 6.40635 21.3748 7.49826 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
-                                                        stroke="#00AAFF"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="cards cards--two cards--highlight">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-03.png" alt="card-img" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-3 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 10L10 14.375L17.5 10" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Laptop
-                                        </h6>
-                                        <a href="ad-details.html" className="text--body-3-600 cards__caption-title">HP 840 G6 (8/256)</a>
-
-                                        <div className="cards__user-details">
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 username">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 10C10.2091 10 12 8.20914 12 6C12 3.79086 10.2091 2 8 2C5.79086 2 4 3.79086 4 6C4 8.20914 5.79086 10 8 10Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path
-                                                                d="M1.93652 13.4994C2.55125 12.4354 3.43516 11.5519 4.49945 10.9376C5.56375 10.3234 6.77095 9.99999 7.99978 10C9.22862 10 10.4358 10.3234 11.5001 10.9377C12.5644 11.552 13.4483 12.4355 14.063 13.4995"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Komolafe Oluwatobi
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                            <path
-                                                                d="M13 6.5C13 11 8 14.5 8 14.5C8 14.5 3 11 3 6.5C3 5.17392 3.52678 3.90215 4.46447 2.96447C5.40215 2.02678 6.67392 1.5 8 1.5C9.32608 1.5 10.5979 2.02678 11.5355 2.96447C12.4732 3.90215 13 5.17392 13 6.5V6.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Sultan Bello Hall
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path d="M8 4.5V8H11.5" stroke="#939AAD" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <span className="cards__price-title text--body-2"></span>
-                                        <button className="btn-icon">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.62519 7.49826 3.01561 6.40635 3.72989 5.53493C4.44416 4.66351 5.4382 4.06636 6.54299 3.84501C7.64778 3.62367 8.79514 3.79179 9.78999 4.32079C10.7848 4.84979 11.5658 5.70702 12 6.74673L12 6.74673C12.4342 5.70702 13.2152 4.84979 14.21 4.32079C15.2049 3.79179 16.3522 3.62367 17.457 3.84501C18.5618 4.06636 19.5558 4.66351 20.2701 5.53493C20.9844 6.40635 21.3748 7.49826 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
-                                                        stroke="#00AAFF"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="cards cards--two">
-                                <a href="marketplace.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-04.png" alt="card-img" />
-                                    <span className="cards__tag text--body-5">
-                                        Urgent
-                                    </span>
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-3 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 10L10 14.375L17.5 10" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Laudry
-                                        </h6>
-                                        <a href="#" className="text--body-3-600 cards__caption-title">Laudry Services</a>
-
-                                        <div className="cards__user-details">
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 username">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 10C10.2091 10 12 8.20914 12 6C12 3.79086 10.2091 2 8 2C5.79086 2 4 3.79086 4 6C4 8.20914 5.79086 10 8 10Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path
-                                                                d="M1.93652 13.4994C2.55125 12.4354 3.43516 11.5519 4.49945 10.9376C5.56375 10.3234 6.77095 9.99999 7.99978 10C9.22862 10 10.4358 10.3234 11.5001 10.9377C12.5644 11.552 13.4483 12.4355 14.063 13.4995"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                            <path
-                                                                d="M13 6.5C13 11 8 14.5 8 14.5C8 14.5 3 11 3 6.5C3 5.17392 3.52678 3.90215 4.46447 2.96447C5.40215 2.02678 6.67392 1.5 8 1.5C9.32608 1.5 10.5979 2.02678 11.5355 2.96447C12.4732 3.90215 13 5.17392 13 6.5V6.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Geology Department
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path d="M8 4.5V8H11.5" stroke="#939AAD" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <span className="cards__price-title text--body-2"></span>
-                                        <button className="btn-icon">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.62519 7.49826 3.01561 6.40635 3.72989 5.53493C4.44416 4.66351 5.4382 4.06636 6.54299 3.84501C7.64778 3.62367 8.79514 3.79179 9.78999 4.32079C10.7848 4.84979 11.5658 5.70702 12 6.74673L12 6.74673C12.4342 5.70702 13.2152 4.84979 14.21 4.32079C15.2049 3.79179 16.3522 3.62367 17.457 3.84501C18.5618 4.06636 19.5558 4.66351 20.2701 5.53493C20.9844 6.40635 21.3748 7.49826 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
-                                                        stroke="#00AAFF"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="cards cards--two">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-05.png" alt="card-img" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-3 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 10L10 14.375L17.5 10" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Services
-                                        </h6>
-                                        <a href="#" className="text--body-3-600 cards__caption-title">Professional hair stylist</a>
-
-                                        <div className="cards__user-details">
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 username">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 10C10.2091 10 12 8.20914 12 6C12 3.79086 10.2091 2 8 2C5.79086 2 4 3.79086 4 6C4 8.20914 5.79086 10 8 10Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path
-                                                                d="M1.93652 13.4994C2.55125 12.4354 3.43516 11.5519 4.49945 10.9376C5.56375 10.3234 6.77095 9.99999 7.99978 10C9.22862 10 10.4358 10.3234 11.5001 10.9377C12.5644 11.552 13.4483 12.4355 14.063 13.4995"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                            <path
-                                                                d="M13 6.5C13 11 8 14.5 8 14.5C8 14.5 3 11 3 6.5C3 5.17392 3.52678 3.90215 4.46447 2.96447C5.40215 2.02678 6.67392 1.5 8 1.5C9.32608 1.5 10.5979 2.02678 11.5355 2.96447C12.4732 3.90215 13 5.17392 13 6.5V6.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Zoological Garden
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path d="M8 4.5V8H11.5" stroke="#939AAD" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <span className="cards__price-title text--body-2"></span>
-                                        <button className="btn-icon">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.62519 7.49826 3.01561 6.40635 3.72989 5.53493C4.44416 4.66351 5.4382 4.06636 6.54299 3.84501C7.64778 3.62367 8.79514 3.79179 9.78999 4.32079C10.7848 4.84979 11.5658 5.70702 12 6.74673L12 6.74673C12.4342 5.70702 13.2152 4.84979 14.21 4.32079C15.2049 3.79179 16.3522 3.62367 17.457 3.84501C18.5618 4.06636 19.5558 4.66351 20.2701 5.53493C20.9844 6.40635 21.3748 7.49826 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
-                                                        stroke="#00AAFF"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="cards cards--two">
-                                <a href="ad-details.html" className="cards__img-wrapper">
-                                    <img src="/src/images/view/img-06.png" alt="card-img" />
-                                </a>
-                                <div className="cards__info">
-                                    <div className="cards__info-top">
-                                        <h6 className="text--body-3 cards__category-title">
-                                            <span className="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 10L10 14.375L17.5 10" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="#FF4F4F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Textbook
-                                        </h6>
-                                        <a href="#" className="text--body-3-600 cards__caption-title">GES 300 Past Question</a>
-
-                                        <div className="cards__user-details">
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 username">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 10C10.2091 10 12 8.20914 12 6C12 3.79086 10.2091 2 8 2C5.79086 2 4 3.79086 4 6C4 8.20914 5.79086 10 8 10Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path
-                                                                d="M1.93652 13.4994C2.55125 12.4354 3.43516 11.5519 4.49945 10.9376C5.56375 10.3234 6.77095 9.99999 7.99978 10C9.22862 10 10.4358 10.3234 11.5001 10.9377C12.5644 11.552 13.4483 12.4355 14.063 13.4995"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                            <path
-                                                                d="M13 6.5C13 11 8 14.5 8 14.5C8 14.5 3 11 3 6.5C3 5.17392 3.52678 3.90215 4.46447 2.96447C5.40215 2.02678 6.67392 1.5 8 1.5C9.32608 1.5 10.5979 2.02678 11.5355 2.96447C12.4732 3.90215 13 5.17392 13 6.5V6.5Z"
-                                                                stroke="#939AAD"
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                    Idia Hall
-                                                </h5>
-                                            </div>
-                                            <div className="cards__user-details__item">
-                                                <h5 className="text--body-4 location">
-                                                    <span className="icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="#939AAD" stroke-miterlimit="10"></path>
-                                                            <path d="M8 4.5V8H11.5" stroke="#939AAD" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="cards__info-bottom">
-                                        <span className="cards__price-title text--body-2"></span>
-                                        <button className="btn-icon">
-                                            <span className="icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.62519 7.49826 3.01561 6.40635 3.72989 5.53493C4.44416 4.66351 5.4382 4.06636 6.54299 3.84501C7.64778 3.62367 8.79514 3.79179 9.78999 4.32079C10.7848 4.84979 11.5658 5.70702 12 6.74673L12 6.74673C12.4342 5.70702 13.2152 4.84979 14.21 4.32079C15.2049 3.79179 16.3522 3.62367 17.457 3.84501C18.5618 4.06636 19.5558 4.66351 20.2701 5.53493C20.9844 6.40635 21.3748 7.49826 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
-                                                        stroke="#00AAFF"
-                                                        stroke-width="1.6"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section className="section price-plan">
                 <div className="container">
                     <h2 className="price-plan__title text--heading-1">Get Membership Now</h2>
@@ -1512,7 +618,7 @@ const Home = () => {
                                             <h5 className="text--display-3">₦3,000</h5>
                                             <span className="text--body-3">/month</span>
                                         </div>
-                                        <a href="#" className="plan-card__select-pack btn btn--bg w-100" data-bs-toggle="modal" data-bs-target="#planModal">
+                                        <Link href="#" className="plan-card__select-pack btn btn--bg w-100" data-bs-toggle="modal" data-bs-target="#planModal">
                                             Choose Plan
                                             <span className="icon--right">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1520,7 +626,7 @@ const Home = () => {
                                                     <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </svg>
                                             </span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="plan-card__bottom">
                                         <div className="plan-card__package">
@@ -1596,7 +702,7 @@ const Home = () => {
                                             <span className="text--body-3">/month</span>
                                         </div>
 
-                                        <a href="#" className="plan-card__select-pack btn btn--bg w-100" data-bs-toggle="modal" data-bs-target="#planModal">
+                                        <Link href="#" className="plan-card__select-pack btn btn--bg w-100" data-bs-toggle="modal" data-bs-target="#planModal">
                                             Choose Plan
                                             <span className="icon--right">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1604,7 +710,7 @@ const Home = () => {
                                                     <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </svg>
                                             </span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="plan-card__bottom">
                                         <div className="plan-card__package">
@@ -1679,7 +785,7 @@ const Home = () => {
                                             <h5 className="text--display-3">₦10,000</h5>
                                             <span className="text--body-3">/month</span>
                                         </div>
-                                        <a href="#" className="plan-card__select-pack btn btn--bg w-100" data-bs-toggle="modal" data-bs-target="#planModal">
+                                        <Link href="#" className="plan-card__select-pack btn btn--bg w-100" data-bs-toggle="modal" data-bs-target="#planModal">
                                             Choose Plan
                                             <span className="icon--right">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1687,7 +793,7 @@ const Home = () => {
                                                     <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </svg>
                                             </span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="plan-card__bottom">
                                         <div className="plan-card__package">
@@ -1761,7 +867,7 @@ const Home = () => {
                     <div className="subscribe__content">
                         <div className="subscribe__left">
                             <h2 className="subscribe__title text--heading-2">Subscribe to our newsletter</h2>
-                            <p className="text--body-3 subscribe__description"style={{ textAlign: "justify" }}>Stay updated with the latest news, special offers, and exclusive content delivered straight to your inbox.
+                            <p className="text--body-3 subscribe__description" style={{ textAlign: "justify" }}>Stay updated with the latest news, special offers, and exclusive content delivered straight to your inbox.
                             </p>
                         </div>
                         <div className="subscribe__right">
