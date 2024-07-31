@@ -83,8 +83,8 @@ const PostAds = () => {
     for (let i = 0; i < images.length; i++) {
       adData.append('images', images[i]);
     }
-    adData.append('features', JSON.stringify(features)); // Serialize features array as a string
-  
+    adData.append('features', features);
+
     try {
       await createAd(adData);
       onOpen();
@@ -94,7 +94,6 @@ const PostAds = () => {
       setLoading(false); // Set loading state to false on error
     }
   };
-  
 
   const handleModalClose = () => {
     onOpenChange(false);
