@@ -1,11 +1,10 @@
+// AdContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 
 export const AdContext = createContext();
 
 const AdProvider = ({ children }) => {
   const apiUrl = "https://beep-backend.vercel.app";
-  // const apiUrl = "http://localhost:3000"
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
   const [ad, setAd] = useState(null);
@@ -21,7 +20,9 @@ const AdProvider = ({ children }) => {
   const fetchAds = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads/user`, { credentials: 'include' });
+      const response = await fetch(`${apiUrl}/api/ads/user`, {
+        credentials: 'include',
+      });
       const data = await response.json();
       setAds(data.ads);
       setLoading(false);
@@ -34,10 +35,12 @@ const AdProvider = ({ children }) => {
   const fetchAllAds = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads`, { credentials: 'include' });
+      const response = await fetch(`${apiUrl}/api/ads`, {
+        credentials: 'include',
+      });
       const data = await response.json();
-      setAllAds(data);
-      setFilteredAds(data);
+      setAllAds(data.ads);
+      setFilteredAds(data.ads);
       setLoading(false);
     } catch (error) {
       console.log('Failed to fetch ads', error.message);
@@ -74,7 +77,9 @@ const AdProvider = ({ children }) => {
   const fetchAdById = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads/${id}`, { credentials: 'include' });
+      const response = await fetch(`${apiUrl}/api/ads/${id}`, {
+        credentials: 'include',
+      });
       const data = await response.json();
       setAd(data);
       setLoading(false);
@@ -87,12 +92,11 @@ const AdProvider = ({ children }) => {
   const createAd = async (adData) => {
     try {
       setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads`, {
+      await fetch(`${apiUrl}/api/ads`, {
         method: 'POST',
         credentials: 'include',
-        body: adData
+        body: adData,
       });
-      const data = await response.json();
       fetchAds();
       setLoading(false);
       toast.success('Ad created successfully');
@@ -109,7 +113,7 @@ const AdProvider = ({ children }) => {
       await fetch(`${apiUrl}/api/ads/${id}`, {
         method: 'PUT',
         credentials: 'include',
-        body: adData
+        body: adData,
       });
       fetchAds();
       setLoading(false);
@@ -126,7 +130,7 @@ const AdProvider = ({ children }) => {
       setLoading(true);
       await fetch(`${apiUrl}/api/ads/${id}`, {
         method: 'DELETE',
-        credentials: 'include'
+        credentials: 'include',
       });
       fetchAds();
       setLoading(false);
