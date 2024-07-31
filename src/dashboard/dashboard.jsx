@@ -247,7 +247,7 @@ const DashboardPage = () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {recentAds.map(ad => (
+        {recentAds?.map(ad => (
           <div key={ad._id} className="dashboard__posted-ads-slider--item">
             <div className="cards cards--one overflow-visible border rounded-lg shadow-md p-4">
               <Link to={`/ad-details/${ad._id}`} className="cards__img-wrapper block mb-4">

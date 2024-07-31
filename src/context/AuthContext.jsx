@@ -1,4 +1,4 @@
-// AuthContext.js
+// src/context/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const apiUrl = "https://beep-backend.vercel.app"
+  const apiUrl = "http://localhost:3000";
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 

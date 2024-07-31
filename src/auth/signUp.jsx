@@ -1,3 +1,4 @@
+// src/components/SignUp.js
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,15 +11,10 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const result = await signUp(fullName, username, email, password);
-    if (result.success) {
-      alert('Registration successful');
-      navigate('/login');
-    } else {
-      alert(result.message);
-    }
+    signUp(fullName, username, email, password);
+    navigate('/login');
   };
 
   return (
@@ -57,7 +53,7 @@ const SignUp = () => {
                   </span>
                   <div className="registration__features-info">
                     <h2 className="text--body-2-600">Manage Your Ads</h2>
-                    <p className="text--body-3">Easily manage your ads on your website! with our user-friendly interface. You can edit, update, and track your ads. Keep your ads up-to-date and reach more potential buyers with just a few clicks.</p>
+                    <p className="text--body-3">Easily manage your ads on your website! With our user-friendly interface, you can edit, update, and track your ads. Keep your ads up-to-date and reach more potential buyers with just a few clicks.</p>
                   </div>
                 </div>
                 <div className="registration__features-item">
