@@ -39,8 +39,8 @@ const AdProvider = ({ children }) => {
         credentials: 'include',
       });
       const data = await response.json();
-      setAllAds(data.ads);
-      setFilteredAds(data.ads);
+      setAllAds(data);
+      setFilteredAds(data);
       setLoading(false);
     } catch (error) {
       console.log('Failed to fetch ads', error.message);

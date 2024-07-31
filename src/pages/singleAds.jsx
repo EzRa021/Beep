@@ -14,7 +14,7 @@ const SingleAds = () => {
 
 
     const handleSendMessage = () => {
-        const whatsappUrl = getLinkWhatsApp(ad.phoneNumber, ` Hello, I am interested in your ${ad.category} ${ad.adName}.`);
+        const whatsappUrl = getLinkWhatsApp(ad?.phoneNumber, ` Hello, I am interested in your ${ad.category} ${ad.adName}.`);
         window.open(whatsappUrl, '_blank');
 
     }
@@ -66,7 +66,7 @@ const SingleAds = () => {
                                 </div>
                             </div>
                             <div class="product-item__ads-info">
-                                <h2 class="text--heading-2 title">{ad.adName}</h2>
+                                <h2 class="text--heading-2 title">{ad?.adName}</h2>
 
                                 <ul class="post-details">
                                     <li class="post-details__item">
@@ -88,7 +88,7 @@ const SingleAds = () => {
                                                 />
                                             </svg>
                                         </span>
-                                        <p class="text--body-3">{ad.location}</p>
+                                        <p class="text--body-3">{ad?.location}</p>
                                     </li>
                                     <li class="post-details__item">
                                         <span class="icon">
@@ -97,21 +97,21 @@ const SingleAds = () => {
                                                 <path d="M12 6.75V12H17.25" stroke="#767E94" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </span>
-                                        <p class="text--body-3">{ad.createdAt}</p>
+                                        <p class="text--body-3">{ad?.createdAt}</p>
                                     </li>
 
                                 </ul>
                             </div>
 
                             <div class="" style={{
-                                background: `url(${ad.images[0]}) center center/cover no-repeat`,
+                                // background: `url(${ad?.images[0]}) center center/cover no-repeat`,
 
                             }}>
 
                                 <div class="product-item__slider-content-top">
                                     <div class="product-item__slider product-slider-for">
                                         {
-                                            ad.images.map((image, index) => (
+                                            ad.images?.map((image, index) => (
                                                 <div class="product-item__slider-item">
                                                     <img src={image} alt={index} />
                                                 </div>
@@ -134,7 +134,7 @@ const SingleAds = () => {
                                 <h2 class="text--body-1-600">Descriptions</h2>
 
                                 <p class="text--body-3">
-                                    {ad.description}
+                                    {ad?.description}
                                 </p>
                                 <p class="text--body-3">
 
@@ -147,7 +147,7 @@ const SingleAds = () => {
                                     <li>
                                         <ul>
                                             {
-                                                ad.features.map((feature, index) => (
+                                                ad.features?.map((feature, index) => (
                                                     <li class="feature-item">
                                                         <span class="icon">
                                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -170,7 +170,7 @@ const SingleAds = () => {
                             <div class="product-item__sidebar">
                                 <div class="product-item__sidebar-top">
                                     <div class="product-item__sidebar-item product-price">
-                                        <h2 class="text--heading-2">{ad.price}</h2>
+                                        <h2 class="text--heading-2">{ad?.price}</h2>
                                         <button class="btn--fav">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -211,7 +211,7 @@ const SingleAds = () => {
                                                         />
                                                     </svg>
                                                 </span>
-                                                {ad.phoneNumber}
+                                                {ad?.phoneNumber}
                                             </div>
                                             <div class="number number--show text--body-2">
                                                 <span class="icon">
@@ -303,7 +303,7 @@ const SingleAds = () => {
                                                         <path d="M20.7687 18.5381L13.6362 12" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
                                                 </span>
-                                                <h6 class="text--body-3">{ad.email}</h6>
+                                                <h6 class="text--body-3">{ad?.email}</h6>
                                             </li>
                                             <li class="contact-item">
                                                 <span class="icon">
