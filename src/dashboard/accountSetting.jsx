@@ -3,8 +3,10 @@ import { UserContext } from '../context/UserContext';
 import DashNav from '../components/dashNav';
 import axios from 'axios';
 import BreedCrumb from '../components/breedCrumb';
+import { toast, ToastContainer } from 'react-toastify';
 
 const AccountSettings = () => {
+  const apiUrl = "https://beep-backend.vercel.app";
   const { user, setUser } = useContext(UserContext);
   const [fullName, setFullName] = useState(user?.fullName || '');
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || '');
@@ -33,10 +35,10 @@ const AccountSettings = () => {
         },
       });
       setUser(response.data);
-      alert('Profile updated successfully');
+      toast.success('Profile updated successfully');
     } catch (error) {
       console.error('Failed to update profile', error);
-      alert('Failed to update profile');
+      toast.error('Failed to update profile');
     }
   };
 
@@ -51,10 +53,10 @@ const AccountSettings = () => {
         { currentPassword, newPassword },
         { withCredentials: true }
       );
-      alert('Password changed successfully');
+      toast.success('Password changed successfully');
     } catch (error) {
       console.error('Failed to change password', error);
-      alert('Failed to change password');
+      toast.error('Failed to change password');
     }
   };
 
@@ -65,11 +67,11 @@ const AccountSettings = () => {
     try {
       await axios.delete(`${apiUrl}/api/users`, { withCredentials: true });
       setUser(null);
-      alert('Account deleted successfully');
-      window.location.href = '/';
+      toast.success('Account deleted successfully');
+      window.location.href = '/Sign-up';
     } catch (error) {
       console.error('Failed to delete account', error);
-      alert('Failed to delete account');
+      toast.error('Failed to delete account');
     }
   };
 

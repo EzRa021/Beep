@@ -6,7 +6,7 @@ import Loader from "../components/loader"
 
 const SingleAds = () => {
     const { id } = useParams();
-    const { ad, fetchAdById, error } = useContext(AdContext);
+    const { ad, fetchAdById, relatedAds, error } = useContext(AdContext);
     function getLinkWhatsApp(number, message) {
         const url = 'https://api.whatsapp.com/send?phone=' + number + '&text=' + encodeURIComponent(message);
         return url;
@@ -572,238 +572,57 @@ const SingleAds = () => {
                         </div>
                     </div>
                     <div class="related-post__slider" id="relatedPostSlider">
-                        <div class="related-post__slider-item">
-                            <div class="cards cards--one cards--highlight">
-                                <a href="ad-details.html" class="cards__img-wrapper">
-                                    <img src="./src/images/view/img-02.png" alt="card-img" class="img-fluid" />
-                                    <div class="cards__tag">urgent</div>
-                                </a>
-                                <div class="cards__info">
-                                    <div class="cards__info-top">
-                                        <h6 class="text--body-4 cards__category-title">
-                                            <span class="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Electronics
-                                        </h6>
-                                        <a href="ad-details.html" class="text--body-3-600 cards__caption-title">Binatone Fan</a>
-                                    </div>
-                                    <div class="cards__info-bottom">
-                                        <h6 class="cards__location text--body-4">
-                                            <span class="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            University of Ibadan.
-                                        </h6>
-                                        <span class="cards__price-title text--body-3-600">#32000 </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="related-post__slider-item">
-                            <div class="cards cards--one">
-                                <a href="ad-details.html" class="cards__img-wrapper">
-                                    <img src="./src/images/view/img-03.png" alt="card-img" class="img-fluid" />
-                                </a>
-                                <div class="cards__info">
-                                    <div class="cards__info-top">
-                                        <h6 class="text--body-4 cards__category-title">
-                                            <span class="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Computer services
-                                        </h6>
-                                        <a href="ad-details.html" class="text--body-3-600 cards__caption-title">Hp2000</a>
-                                    </div>
-                                    <div class="cards__info-bottom">
-                                        <h6 class="cards__location text--body-4">
-                                            <span class="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Sultan Bello
-                                        </h6>
-                                        <span class="cards__price-title text--body-3-600">#12000.00 </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="related-post__slider-item">
-                            <div class="cards cards--one">
-                                <a href="ad-details.html" class="cards__img-wrapper">
-                                    <img src="/src/images/view/img-08.png" alt="card-img" class="img-fluid" />
-                                </a>
-                                <div class="cards__info">
-                                    <div class="cards__info-top">
-                                        <h6 class="text--body-4 cards__category-title">
-                                            <span class="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Basic School essentials
-                                        </h6>
-                                        <a href="ad-details.html" class="text--body-3-600 cards__caption-title">Tablet Phone</a>
-                                    </div>
-                                    <div class="cards__info-bottom">
-                                        <h6 class="cards__location text--body-4">
-                                            <span class="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            University of Ibadan
-                                        </h6>
-                                        <span class="cards__price-title text--body-3-600">#68000.00 </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="related-post__slider-item">
-                            <div class="cards cards--one">
-                                <a href="ad-details.html" class="cards__img-wrapper">
-                                    <img src="/src/images/view/img-19.png" alt="card-img" class="img-fluid" />
-                                </a>
-                                <div class="cards__info">
-                                    <div class="cards__info-top">
-                                        <h6 class="text--body-4 cards__category-title">
-                                            <span class="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Home & Living
-                                        </h6>
-                                        <a href="ad-details.html" class="text--body-3-600 cards__caption-title"> School Bag</a>
-                                    </div>
-                                    <div class="cards__info-bottom">
-                                        <h6 class="cards__location text--body-4">
-                                            <span class="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            University of Ibadan
-                                        </h6>
-                                        <span class="cards__price-title text--body-3-600">#6000.00 </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="related-post__slider-item">
-                            <div class="cards cards--one">
-                                <a href="ad-details.html" class="cards__img-wrapper">
-                                    <img src="./src/images/view/img-04.png" alt="card-img" class="img-fluid" />
-                                </a>
-                                <div class="cards__info">
-                                    <div class="cards__info-top">
-                                        <h6 class="text--body-4 cards__category-title">
-                                            <span class="icon">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            Electronics
-                                        </h6>
-                                        <a href="ad-details.html" class="text--body-3-600 cards__caption-title"> Electric Kettle</a>
-                                    </div>
-                                    <div class="cards__info-bottom">
-                                        <h6 class="cards__location text--body-4">
-                                            <span class="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                    <path
-                                                        d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
-                                                        stroke="#27C200"
-                                                        stroke-width="1.2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    ></path>
-                                                </svg>
-                                            </span>
-                                            Awo Hall
-                                        </h6>
-                                        <span class="cards__price-title text--body-3-600">8000.00 </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                     
+                    {relatedAds?.map((relatedAd) => (
+              <div className="col-xl-3 col-md-6" key={relatedAd._id}>
+                <div className="cards cards--one cards--highlight">
+                  <Link to={`single-ad/${relatedAd._id}`} className="cards__img-wrapper">
+                    <img src={relatedAd.images[0]} alt="card-img" className="img-fluid" />
+                  </Link>
+                  <div className="cards__info">
+                    <div className="cards__info-top">
+                      <h6 className="text--body-4 cards__category-title">
+                        <span className="icon">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg>
+                        </span>
+                        {relatedAd.category}
+                      </h6>
+                      <Link to={`/single-ad/${relatedAd._id}`} className="text--body-3-600 cards__caption-title">
+                        {relatedAd.adName}
+                      </Link>
+                    </div>
+                    <div className="cards__info-bottom">
+                      <h6 className="cards__location text--body-4">
+                        <span className="icon">
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
+                              stroke="#27C200"
+                              stroke-width="1.2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                            <path
+                              d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
+                              stroke="#27C200"
+                              stroke-width="1.2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                          </svg>
+                        </span>
+                        {relatedAd.location}
+                      </h6>
+                      <span className="cards__price-title text--body-3-600">{relatedAd.price}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
                     </div>
                 </div>
             </section>

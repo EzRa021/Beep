@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(`${apiUrl}/api/auth/register`, { fullName, username, email, password }, { withCredentials: true });
       setUser(response.data);
       toast.success('Registration successful');
-      navigate('/login');
+      navigate('/sign-in');
     } catch (error) {
       console.log(error.message);
       toast.error('Registration failed');

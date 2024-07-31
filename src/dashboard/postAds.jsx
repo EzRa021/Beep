@@ -168,7 +168,7 @@ const PostAds = () => {
                     </div>
                     <div className="mb-4">
                       <label className="block text-gray-700 mb-2" htmlFor="price">Price</label>
-                      <input className="w-full px-3 py-2 border rounded" type="number" name="price" id="price" value={formData.price} onChange={handleChange} />
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="price" id="price" value={formData.price} onChange={handleChange} />
                     </div>
                     <div className="flex justify-between">
                       <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Next Step</button>

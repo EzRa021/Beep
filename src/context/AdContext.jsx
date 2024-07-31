@@ -1,5 +1,6 @@
 // AdContext.js
 import React, { createContext, useState, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 export const AdContext = createContext();
 
@@ -11,6 +12,7 @@ const AdProvider = ({ children }) => {
   const [allAds, setAllAds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editAd, setEditAd] = useState(null);
+  const [relatedAds, setRelatedAds] = useState([]);
 
   useEffect(() => {
     fetchAds();
@@ -74,20 +76,45 @@ const AdProvider = ({ children }) => {
     setFilteredAds(filtered);
   };
 
-  const fetchAdById = async (id) => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads/${id}`, {
-        credentials: 'include',
-      });
-      const data = await response.json();
-      setAd(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Failed to fetch ad by id', error);
-      setLoading(false);
+// AdContext.jsx
+const fetchAdById = async (id) => {
+  try {
+    setLoading(true);
+
+    // Fetch the ad by ID
+    const response = await fetch(`${apiUrl}/api/ads/${id}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-  };
+
+    const adData = await response.json();
+    setAd(adData);
+
+    // Fetch all ads to filter related ads
+    const relatedAdsResponse = await fetch(`${apiUrl}/api/ads`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (!relatedAdsResponse.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const allAdsData = await relatedAdsResponse.json();
+    const relatedAds = allAdsData?.ads?.filter(ad => ad.subcategory === adData.subcategory && ad._id !== adData._id);
+    setRelatedAds(relatedAds);
+
+
+    setLoading(false);
+  } catch (error) {
+    console.log('Failed to fetch ad by id', error);
+    setLoading(false);
+  }
+};
 
   const createAd = async (adData) => {
     try {
@@ -106,6 +133,7 @@ const AdProvider = ({ children }) => {
       toast.error('Failed to create ad');
     }
   };
+  
 
   const updateAd = async (id, adData) => {
     try {
@@ -153,12 +181,14 @@ const AdProvider = ({ children }) => {
       createAd,
       updateAd,
       ad,
+      relatedAds,
       fetchAdById,
       deleteAd,
       setEditAd,
       loading
     }}>
       {children}
+      <ToastContainer/>
     </AdContext.Provider>
   );
 };
