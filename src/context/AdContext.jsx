@@ -5,7 +5,9 @@ import { toast, ToastContainer } from 'react-toastify';
 export const AdContext = createContext();
 
 const AdProvider = ({ children }) => {
-  const apiUrl = "https://beep-backend.vercel.app";
+  // const apiUrl = "https://beep-backend.vercel.app";
+  const apiUrl = "http://localhost:3000";
+
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
   const [ad, setAd] = useState(null);

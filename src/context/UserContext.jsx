@@ -4,8 +4,8 @@ import axios from 'axios';
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-   const apiUrl = "https://beep-backend.vercel.app"
-    // const apiUrl = "http://localhost:3000"
+  //  const apiUrl = "https://beep-backend.vercel.app"
+    const apiUrl = "http://localhost:3000"
   const [user, setUser] = useState(null);
 
   useEffect(() => {
