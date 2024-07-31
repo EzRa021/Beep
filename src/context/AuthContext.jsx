@@ -1,4 +1,4 @@
-// src/context/AuthContext.js
+// AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const apiUrl = "https://beep-backend.vercel.app";
-  // const apiUrl = "http://localhost:3000"
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -20,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         if (storedUser) {
           setUser(JSON.parse(storedUser));
         } else {
-          const response = await axios.get(`${apiUrl}/api/auth/me`, { withCredentials: true });
+          const response = await axios.get('http://localhost:3000/api/auth/me', { withCredentials: true });
           setUser(response.data);
           localStorage.setItem('user', JSON.stringify(response.data));
         }
@@ -37,10 +35,10 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (fullName, username, email, password) => {
     try {
-      const response = await axios.post(`${apiUrl}/api/auth/register`, { fullName, username, email, password }, { withCredentials: true });
+      const response = await axios.post('http://localhost:3000/api/auth/register', { fullName, username, email, password }, { withCredentials: true });
       setUser(response.data);
       toast.success('Registration successful');
-      navigate('/sign-in');
+      navigate('/login');
     } catch (error) {
       console.log(error.message);
       toast.error('Registration failed');
@@ -49,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     try {
-      const response = await axios.post(`${apiUrl}/api/auth/login`, { email, password }, { withCredentials: true });
+      const response = await axios.post('http://localhost:3000/api/auth/login', { email, password }, { withCredentials: true });
       setUser(response.data);
       localStorage.setItem('user', JSON.stringify(response.data));
       toast.success('Login successful');
@@ -63,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(`${apiUrl}/api/auth/logout`, {}, { withCredentials: true });
+      await axios.post('http://localhost:3000/api/auth/logout', {}, { withCredentials: true });
       setUser(null);
       localStorage.removeItem('user');
       toast.success('Logout successful');

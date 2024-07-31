@@ -11,7 +11,6 @@ const PostAds = () => {
   const { createAd } = useContext(AdContext);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     adName: '',
     category: '',
@@ -69,7 +68,6 @@ const PostAds = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     const adData = new FormData();
     for (const key in formData) {
       if (key === 'overview') {
@@ -83,18 +81,16 @@ const PostAds = () => {
     for (let i = 0; i < images.length; i++) {
       adData.append('images', images[i]);
     }
-    adData.append('features', features);
-
+    adData.append('features', JSON.stringify(features)); // Convert features to JSON string
+  
     try {
       await createAd(adData);
       onOpen();
-      setLoading(false);
     } catch (error) {
       toast.error(error.message || 'An error occurred while posting the ad.');
-      setLoading(false);
     }
   };
-
+  
   const handleModalClose = () => {
     onOpenChange(false);
     navigate('/my-ads');
@@ -168,7 +164,7 @@ const PostAds = () => {
                     </div>
                     <div className="mb-4">
                       <label className="block text-gray-700 mb-2" htmlFor="price">Price</label>
-                      <input className="w-full px-3 py-2 border rounded" type="text" name="price" id="price" value={formData.price} onChange={handleChange} />
+                      <input className="w-full px-3 py-2 border rounded" type="number" name="price" id="price" value={formData.price} onChange={handleChange} />
                     </div>
                     <div className="flex justify-between">
                       <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Next Step</button>
@@ -254,14 +250,7 @@ const PostAds = () => {
                     </div>
                     <div className="flex justify-between">
                       <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Previous</button>
-                      <button type="submit" className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={loading}>
-                        {loading ? (
-                          <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                          </svg>
-                        ) : 'Post Ad'}
-                      </button>
+                      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Post Ad</button>
                     </div>
                   </form>
                 </div>
