@@ -125,16 +125,17 @@ const createAd = async (adData) => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create ad');
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message || 'Failed to create ad');
     }
 
     fetchAds();
     setLoading(false);
     toast.success('Ad created successfully');
   } catch (error) {
-    console.error('Failed to create ad', error);
+    console.error('Failed to create ad:', error.message);
     setLoading(false);
-    toast.error('Failed to create ad');
+    toast.error(error.message || 'Failed to create ad');
   }
 };
 

@@ -94,6 +94,7 @@ const PostAds = () => {
       setLoading(false); // Set loading state to false on error
     }
   };
+  
 
   const handleModalClose = () => {
     onOpenChange(false);
