@@ -83,8 +83,8 @@ const PostAds = () => {
     for (let i = 0; i < images.length; i++) {
       adData.append('images', images[i]);
     }
-    adData.append('features', features);
-
+    adData.append('features', JSON.stringify(features)); // Serialize features array as a string
+  
     try {
       await createAd(adData);
       onOpen();

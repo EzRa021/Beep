@@ -115,25 +115,28 @@ const fetchAdById = async (id) => {
     setLoading(false);
   }
 };
+const createAd = async (adData) => {
+  try {
+    setLoading(true);
+    const response = await fetch(`${apiUrl}/api/ads`, {
+      method: 'POST',
+      credentials: 'include',
+      body: adData,
+    });
 
-  const createAd = async (adData) => {
-    try {
-      setLoading(true);
-      await fetch(`${apiUrl}/api/ads`, {
-        method: 'POST',
-        credentials: 'include',
-        body: adData,
-      });
-      fetchAds();
-      setLoading(false);
-      toast.success('Ad created successfully');
-    } catch (error) {
-      console.error('Failed to create ad', error);
-      setLoading(false);
-      toast.error('Failed to create ad');
+    if (!response.ok) {
+      throw new Error('Failed to create ad');
     }
-  };
-  
+
+    fetchAds();
+    setLoading(false);
+    toast.success('Ad created successfully');
+  } catch (error) {
+    console.error('Failed to create ad', error);
+    setLoading(false);
+    toast.error('Failed to create ad');
+  }
+};
 
   const updateAd = async (id, adData) => {
     try {
