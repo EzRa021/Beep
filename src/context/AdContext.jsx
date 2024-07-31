@@ -4,6 +4,7 @@ import axios from 'axios';
 export const AdContext = createContext();
 
 const AdProvider = ({ children }) => {
+  const apiUrl = "https://beep-backend.vercel.app"
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
   const [ad, setAd] = useState(null);
@@ -19,11 +20,11 @@ const AdProvider = ({ children }) => {
   const fetchAds = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3000/api/ads/user', { withCredentials: true });
+      const response = await axios.get(`${apiUrl}/api/ads/user`, { withCredentials: true });
       setAds(response.data.ads);
       setLoading(false);
     } catch (error) {
-      console.error('Failed to fetch ads', error);
+      console.log('Failed to fetch ads', error.message);
       setLoading(false);
     }
   };
@@ -31,7 +32,7 @@ const AdProvider = ({ children }) => {
   const fetchAllAds = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3000/api/ads', { withCredentials: true });
+      const response = await axios.get(`${apiUrl}/api/ads`, { withCredentials: true });
       setAllAds(response.data);
       setFilteredAds(response.data);
       setLoading(false);
@@ -70,7 +71,7 @@ const AdProvider = ({ children }) => {
   const fetchAdById = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/ads/${id}`, { withCredentials: true });
+      const response = await axios.get(`${apiUrl}/api/ads/${id}`, { withCredentials: true });
       setAd(response.data);
       setLoading(false);
     } catch (error) {
@@ -82,7 +83,7 @@ const AdProvider = ({ children }) => {
   const createAd = async (adData) => {
     try {
       setLoading(true);
-      await axios.post('http://localhost:3000/api/ads', adData, { withCredentials: true });
+      await axios.post(`${apiUrl}/api/ads`, adData, { withCredentials: true });
       fetchAds();
       setLoading(false);
       toast.success('Ad created successfully');
@@ -96,7 +97,7 @@ const AdProvider = ({ children }) => {
   const updateAd = async (id, adData) => {
     try {
       setLoading(true);
-      await axios.put(`http://localhost:3000/api/ads/${id}`, adData, { withCredentials: true });
+      await axios.put(`${apiUrl}/api/ads/${id}`, adData, { withCredentials: true });
       fetchAds();
       setLoading(false);
       toast.success('Ad updated successfully');
@@ -110,7 +111,7 @@ const AdProvider = ({ children }) => {
   const deleteAd = async (id) => {
     try {
       setLoading(true);
-      await axios.delete(`http://localhost:3000/api/ads/${id}`, { withCredentials: true });
+      await axios.delete(`${apiUrl}/api/ads/${id}`, { withCredentials: true });
       fetchAds();
       setLoading(false);
       toast.success('Ad deleted successfully');

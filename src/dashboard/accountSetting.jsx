@@ -26,7 +26,7 @@ const AccountSettings = () => {
       formData.append('profileImage', profileImage);
     }
     try {
-      const response = await axios.put('http://localhost:3000/api/users/profile', formData, {
+      const response = await axios.put(`${apiUrl}/api/users/profile`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -47,8 +47,7 @@ const AccountSettings = () => {
       return;
     }
     try {
-      await axios.put(
-        'http://localhost:3000/api/users/password',
+      await axios.put(`${apiUrl}/users/password`,
         { currentPassword, newPassword },
         { withCredentials: true }
       );
@@ -64,7 +63,7 @@ const AccountSettings = () => {
       return;
     }
     try {
-      await axios.delete('http://localhost:3000/api/users', { withCredentials: true });
+      await axios.delete(`${apiUrl}/api/users`, { withCredentials: true });
       setUser(null);
       alert('Account deleted successfully');
       window.location.href = '/';
