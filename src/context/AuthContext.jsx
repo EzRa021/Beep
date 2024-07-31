@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = "https://beep-backend.vercel.app";
+  // const apiUrl = "http://localhost:3000"
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 

@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 export const AdContext = createContext();
 
 const AdProvider = ({ children }) => {
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = "https://beep-backend.vercel.app";
+  // const apiUrl = "http://localhost:3000"
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
   const [ad, setAd] = useState(null);
@@ -35,8 +36,8 @@ const AdProvider = ({ children }) => {
       setLoading(true);
       const response = await fetch(`${apiUrl}/api/ads`, { credentials: 'include' });
       const data = await response.json();
-      setAllAds(data.ads);
-      setFilteredAds(data.ads);
+      setAllAds(data);
+      setFilteredAds(data);
       setLoading(false);
     } catch (error) {
       console.log('Failed to fetch ads', error.message);
