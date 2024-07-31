@@ -1,20 +1,16 @@
-// AdContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const AdContext = createContext();
 
 const AdProvider = ({ children }) => {
   const apiUrl = "https://beep-backend.vercel.app";
-  // const apiUrl = "http://localhost:3000";
-
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
   const [ad, setAd] = useState(null);
   const [allAds, setAllAds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editAd, setEditAd] = useState(null);
-  const [relatedAds, setRelatedAds] = useState([]);
 
   useEffect(() => {
     fetchAds();
@@ -24,9 +20,7 @@ const AdProvider = ({ children }) => {
   const fetchAds = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads/user`, {
-        credentials: 'include',
-      });
+      const response = await fetch(`${apiUrl}/api/ads/user`, { credentials: 'include' });
       const data = await response.json();
       setAds(data.ads);
       setLoading(false);
@@ -39,9 +33,7 @@ const AdProvider = ({ children }) => {
   const fetchAllAds = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${apiUrl}/api/ads`, {
-        credentials: 'include',
-      });
+      const response = await fetch(`${apiUrl}/api/ads`, { credentials: 'include' });
       const data = await response.json();
       setAllAds(data);
       setFilteredAds(data);
@@ -78,68 +70,42 @@ const AdProvider = ({ children }) => {
     setFilteredAds(filtered);
   };
 
-// AdContext.jsx
-const fetchAdById = async (id) => {
-  try {
-    setLoading(true);
-
-    // Fetch the ad by ID
-    const response = await fetch(`${apiUrl}/api/ads/${id}`, {
-      method: 'GET',
-      credentials: 'include',
-    });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+  const fetchAdById = async (id) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${apiUrl}/api/ads/${id}`, { credentials: 'include' });
+      const data = await response.json();
+      setAd(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Failed to fetch ad by id', error);
+      setLoading(false);
     }
+  };
 
-    const adData = await response.json();
-    setAd(adData);
+  const createAd = async (adData) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${apiUrl}/api/ads`, {
+        method: 'POST',
+        credentials: 'include',
+        body: adData,
+      });
 
-    // Fetch all ads to filter related ads
-    const relatedAdsResponse = await fetch(`${apiUrl}/api/ads`, {
-      method: 'GET',
-      credentials: 'include',
-    });
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || 'Failed to create ad');
+      }
 
-    if (!relatedAdsResponse.ok) {
-      throw new Error('Network response was not ok');
+      fetchAds();
+      setLoading(false);
+      toast.success('Ad created successfully');
+    } catch (error) {
+      console.error('Failed to create ad:', error.message);
+      setLoading(false);
+      toast.error(error.message || 'Failed to create ad');
     }
-
-    const allAdsData = await relatedAdsResponse.json();
-    const relatedAds = allAdsData?.ads?.filter(ad => ad.subcategory === adData.subcategory && ad._id !== adData._id);
-    setRelatedAds(relatedAds);
-
-
-    setLoading(false);
-  } catch (error) {
-    console.log('Failed to fetch ad by id', error);
-    setLoading(false);
-  }
-};
-const createAd = async (adData) => {
-  try {
-    setLoading(true);
-    const response = await fetch(`${apiUrl}/api/ads`, {
-      method: 'POST',
-      credentials: 'include',
-      body: adData,
-    });
-
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      throw new Error(errorResponse.message || 'Failed to create ad');
-    }
-
-    fetchAds();
-    setLoading(false);
-    toast.success('Ad created successfully');
-  } catch (error) {
-    console.error('Failed to create ad:', error.message);
-    setLoading(false);
-    toast.error(error.message || 'Failed to create ad');
-  }
-};
+  };
 
   const updateAd = async (id, adData) => {
     try {
@@ -187,14 +153,12 @@ const createAd = async (adData) => {
       createAd,
       updateAd,
       ad,
-      relatedAds,
       fetchAdById,
       deleteAd,
       setEditAd,
       loading
     }}>
       {children}
-      <ToastContainer/>
     </AdContext.Provider>
   );
 };

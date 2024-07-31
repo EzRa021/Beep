@@ -429,7 +429,7 @@
 }
 
 .text--display-2 {
-  font-size: 72px;
+  /* font-size: 72px; */
   text-transform: capitalize;
 }
 
@@ -1906,14 +1906,14 @@ a {
 }
 @media (max-width: 1199px) {
   .banner--three .banner__title {
-    font-size: 48px;
+    /* font-size: 48px; */
     line-height: 68px;
     width: 100%;
   }
 }
 @media (max-width: 767px) {
   .banner--three .banner__title {
-    font-size: 28px;
+    /* font-size: 28px; */
     line-height: 42px;
   }
 }

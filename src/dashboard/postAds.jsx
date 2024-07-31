@@ -11,7 +11,7 @@ const PostAds = () => {
   const { createAd } = useContext(AdContext);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false); // New state for loading
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     adName: '',
     category: '',
@@ -69,7 +69,7 @@ const PostAds = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true
+    setLoading(true);
     const adData = new FormData();
     for (const key in formData) {
       if (key === 'overview') {
@@ -88,10 +88,10 @@ const PostAds = () => {
     try {
       await createAd(adData);
       onOpen();
-      setLoading(false); // Set loading state to false after success
+      setLoading(false);
     } catch (error) {
       toast.error(error.message || 'An error occurred while posting the ad.');
-      setLoading(false); // Set loading state to false on error
+      setLoading(false);
     }
   };
 

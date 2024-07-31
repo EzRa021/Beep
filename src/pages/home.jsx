@@ -12,7 +12,7 @@ const Home = () => {
             <div className="banner banner--three">
                 <div className="container">
                     <span className="banner__tag text--body-2-600">OVER 5,000 LIVE ADS</span>
-                    <div className="banner__title text--display-2 animate__animated animate__bounceInDown">
+                    <div className=" text-6xl font-bold banner__title text--display-2 animate__animated animate__bounceInDown">
                         WELCOME TO UNIVERSITY OF IBADAN ONLINE MINI MARKET.
                     </div>
 
