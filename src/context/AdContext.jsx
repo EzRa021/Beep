@@ -18,7 +18,6 @@ const AdProvider = ({ children }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchAdById
       fetchAds();
       fetchAllAds();
     }, 2000);
