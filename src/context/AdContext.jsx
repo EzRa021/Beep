@@ -20,7 +20,7 @@ const AdProvider = ({ children }) => {
     const interval = setInterval(() => {
       fetchAds();
       fetchAllAds();
-    }, 2000);
+    }, 20000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
@@ -33,7 +33,7 @@ const AdProvider = ({ children }) => {
       // toast.success('Ads fetched successfully');
     } catch (error) {
       console.error('Failed to fetch ads', error);
-      toast.error('Failed to fetch ads');
+      // toast.error('Failed to fetch ads');
     }
   };
 
