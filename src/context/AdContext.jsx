@@ -18,6 +18,7 @@ const AdProvider = ({ children }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      fetchAdById
       fetchAds();
       fetchAllAds();
     }, 2000);
@@ -92,7 +93,7 @@ const AdProvider = ({ children }) => {
     try {
       await axios.post(`${apiUrl}/api/ads`, adData, { withCredentials: true });
       fetchAllAds();
-      toast.success('Ad created successfully');
+      // toast.success('Ad created successfully');
     } catch (error) {
       console.error('Failed to create ad', error);
       toast.error('Failed to create ad');

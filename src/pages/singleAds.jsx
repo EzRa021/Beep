@@ -108,7 +108,7 @@ const SingleAds = () => {
 
                             }}>
 
-                                <div class="product-item__slider-content-top">
+                                <div class="product-item__slider-content-top mt-5">
                                     <div class="product-item__slider product-slider-for">
                                         {
                                             ad.images?.map((image, index) => (
