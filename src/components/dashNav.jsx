@@ -3,10 +3,12 @@
 import React, { useContext } from 'react'
 
 import { AuthContext } from '../context/AuthContext';
+import { UserContext } from '../context/UserContext';
 import { Link } from 'react-router-dom';
 
 const DashNav = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
   console.log(user)
 
 
@@ -103,7 +105,7 @@ const DashNav = () => {
         </div>
         <Link className="flex gap-2 pl-10 items-center  w-full h-16 mt-auto bg-gray-800 hover:bg-gray-700 hover:text-gray-300" to="/account">
           <img className="w-8 h-8 rounded-full" src={user?.profileImage || '/default-profile.png'} alt="Profile" />
-          <span className="ml-2 text-sm font-medium">{user?.fullName || 'Account'}</span>
+          <span className="ml-2 text-sm font-medium">{user?.name || 'Account'}</span>
         </Link>
       </div>
     </div>

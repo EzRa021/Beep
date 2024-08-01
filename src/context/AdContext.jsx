@@ -17,8 +17,13 @@ const AdProvider = ({ children }) => {
   const [editAd, setEditAd] = useState(null);
 
   useEffect(() => {
-    fetchAds();
-    fetchAllAds();
+    const interval = setInterval(() => {
+      fetchAds();
+      fetchAllAds();
+    }, 2000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   const fetchAds = async () => {
@@ -37,7 +42,7 @@ const AdProvider = ({ children }) => {
       const response = await axios.get(`${apiUrl}/api/ads/`, { withCredentials: true });
       setAllAds(response.data);
       setFilteredAds(response.data); // Initialize filteredAds
-      toast.success('All ads fetched successfully');
+      // toast.success('All ads fetched successfully');
     } catch (error) {
       console.error('Failed to fetch all ads', error.message);
       toast.error('Failed to fetch all ads');

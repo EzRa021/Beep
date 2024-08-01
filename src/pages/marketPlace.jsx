@@ -32,7 +32,7 @@ const MarketPlace = () => {
                                                 </span>
                                                 {ad.adName}
                                             </h6>
-                                            <a href="ad-details.html" className="text--body-3-600 cards__caption-title"><b> Soup Kitchen, we prepare all kinds of soup</b></a>
+                                            <a href="ad-details.html" className="text--body-3-600 cards__caption-title line-clamp-2"><b> {ad.description}</b></a>
                                         </div>
                                         <div className="cards__info-bottom">
                                             <h6 className="cards__location text--body-4">
@@ -66,17 +66,7 @@ const MarketPlace = () => {
                         }
 
                     </div>
-                    <div className="recent-post__btn">
-                        <a href="blog-list.html" className="btn">
-                            View All
-                            <span className="icon--right">
-                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.25 12H20.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M14 5.25L20.75 12L14 18.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
-                        </a>
-                    </div>
+                    
                 </div>
             </section>
             {/* <!-- recent-post section end --> */}

@@ -7,6 +7,8 @@ const UserProvider = ({ children }) => {
   // const apiUrl = "http://localhost:3000"
   const apiUrl = "https://beep-backend.vercel.app"
   const [user, setUser] = useState(null);
+  const [singleUser, setSingleUser] = useState(null);
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -20,9 +22,17 @@ const UserProvider = ({ children }) => {
     };
     fetchUser();
   }, []);
-
+  const fetchUserById = async (userId) => {
+    try {
+      const response = await axios.get(`http://localhost:5173/user/${userId}`, { withCredentials: true });
+      setSingleUser(response.data);
+    } catch (error) {
+      console.error('Failed to fetch user by id', error);
+      return null;
+    }
+  };
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, fetchUserById, singleUser  }}>
       {children}
     </UserContext.Provider>
   );
