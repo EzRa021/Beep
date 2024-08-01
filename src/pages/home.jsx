@@ -9,102 +9,13 @@ const Home = () => {
         <>
             {/* <!-- header section end   -->
     <!-- Banner section start  --> */}
-            <div className="banner banner--three">
-                <div className="container">
-                    <span className="banner__tag text--body-2-600">OVER 5,000 LIVE ADS</span>
-                    <div className=" text-6xl font-bold banner__title text--display-2 animate__animated animate__bounceInDown">
-                        WELCOME TO UNIVERSITY OF IBADAN ONLINE MINI MARKET.
-                    </div>
-
-                    {/* <!-- Search Box --> */}
-                    <div className="search">
-                        <form action="#">
-                            <div className="search__content">
-                                {/* <!-- search by keyword/title --> */}
-                                <div className="search__content-item">
-                                    <div className="input-field">
-                                        <input type="text" placeholder="Browse diferent Ads Category" />
-                                        <span className="icon icon--left">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-                                                    stroke="#00AAFF"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M21 21L16.65 16.65" stroke="#00AAFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                {/* <!-- Search By location --> */}
-                                <div className="search__content-item">
-                                    <div className="input-field">
-                                        <input type="text" placeholder="University of Ibadan" />
-                                        <span className="icon icon--left">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M12 12.75C13.6569 12.75 15 11.4069 15 9.75C15 8.09315 13.6569 6.75 12 6.75C10.3431 6.75 9 8.09315 9 9.75C9 11.4069 10.3431 12.75 12 12.75Z"
-                                                    stroke="#00AAFF"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M19.5 9.75C19.5 16.5 12 21.75 12 21.75C12 21.75 4.5 16.5 4.5 9.75C4.5 7.76088 5.29018 5.85322 6.6967 4.4467C8.10322 3.04018 10.0109 2.25 12 2.25C13.9891 2.25 15.8968 3.04018 17.3033 4.4467C18.7098 5.85322 19.5 7.76088 19.5 9.75V9.75Z"
-                                                    stroke="#00AAFF"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                {/* <!-- Select Category temprorary disable --> */}
-                                <div className="search__content-item">
-                                    <div className="input-field input-field--transparent">
-                                        <select name="category" className="js-example-basic-single w-100">
-                                            <option value="null" style={{ display: "none" }}>Select Category</option>
-                                            <option value="1">Laptops</option>
-                                            <option value="2">Phones</option>
-                                            <option value="3">Electronics</option>
-                                            <option value="4">Accessories</option>
-                                            <option value="5">Home Appliances</option>
-                                            <option value="6">Textbooks</option>
-                                            <option value="7">Kitchen Utensils</option>
-                                            <option value="8"></option>
-                                        </select>
-                                        <span className="icon icon--left">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#00AAFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" className="css-i6dzq1">
-                                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                                <polyline points="2 17 12 22 22 17"></polyline>
-                                                <polyline points="2 12 12 17 22 12"></polyline>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                {/* <!-- Search Btn --> */}
-                                <div className="search__content-item">
-                                    <button className="btn btn--lg">
-                                        <span className="icon--left">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-                                                    stroke="white"
-                                                    stroke-width="1.6"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M21 21L16.65 16.65" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+       
+            <div className=" w-full h-screen bg-[#002233] flex justify-center items-center ">
+                <div className="container text-center">
+                    <span className="bg-lime-500 py-2 px-3 rounded-md font-medium text-white">OVER 5,000 LIVE ADS</span>
+                    
+                    <div className=' text-white  flex justify-center item-center mt-5'>
+                        <h1 className=' text-4xl font-medium text-center leading-10 '> WELCOME TO UNIVERSITY OF IBADAN ONLINE <br /> MINI MARKET.</h1>
                     </div>
                 </div>
             </div>

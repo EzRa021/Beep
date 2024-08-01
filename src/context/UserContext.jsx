@@ -22,17 +22,31 @@ const UserProvider = ({ children }) => {
     };
     fetchUser();
   }, []);
-  const fetchUserById = async (userId) => {
-    try {
-      const response = await axios.get(`http://localhost:5173/user/${userId}`, { withCredentials: true });
-      setSingleUser(response.data);
-    } catch (error) {
-      console.error('Failed to fetch user by id', error);
-      return null;
+ // AdContext.jsx
+const fetchUserById = async (userId) => {
+  try {
+    setLoading(true);
+    const response = await fetch(`${apiUrl}/api/users/${userId}`, {
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message || 'Failed to fetch user');
     }
-  };
+
+    const user = await response.json();
+    setLoading(false);
+    return user;
+  } catch (error) {
+    console.error('Failed to fetch user:', error.message);
+    setLoading(false);
+    throw error;
+  }
+};
+
   return (
-    <UserContext.Provider value={{ user, setUser, fetchUserById, singleUser  }}>
+    <UserContext.Provider value={{ user, setUser, fetchUserById }}>
       {children}
     </UserContext.Provider>
   );

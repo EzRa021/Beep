@@ -24,7 +24,6 @@ const MyAd = () => {
         { uid: 'name', name: 'NAME' },
         { uid: 'date', name: 'DATE' },
         { uid: 'price', name: 'PRICE' },
-        { uid: 'status', name: 'STATUS' },
         { uid: 'actions', name: 'ACTIONS' },
     ];
 
@@ -43,12 +42,6 @@ const MyAd = () => {
                 return <p className="text-bold text-sm">{new Date(ad.createdAt).toLocaleDateString()}</p>;
             case 'price':
                 return <p className="text-bold text-sm">${cellValue}</p>;
-            case 'status':
-                return (
-                    <Chip className="capitalize" color={statusColorMap[ad.status]} size="sm" variant="flat">
-                        {cellValue}
-                    </Chip>
-                );
             case 'actions':
                 return (
                     <div className="relative flex items-center gap-2">
@@ -57,11 +50,6 @@ const MyAd = () => {
                                 <Link to={`/ad-details/${ad._id}`}>  <EyeIcon />
                                 </Link>
 
-                            </span>
-                        </Tooltip>
-                        <Tooltip content="Edit ad">
-                            <span className="text-lg text-default-400 cursor-pointer active:opacity-50" onClick={() => setEditAd(ad)}>
-                                <EditIcon />
                             </span>
                         </Tooltip>
                         <Tooltip color="danger" content="Delete ad">

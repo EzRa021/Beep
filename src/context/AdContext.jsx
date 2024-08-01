@@ -1,4 +1,3 @@
-// AdContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
@@ -7,84 +6,85 @@ import 'react-toastify/dist/ReactToastify.css';
 export const AdContext = createContext();
 
 const AdProvider = ({ children }) => {
-  // const apiUrl = "http://localhost:3000"
-  const apiUrl = "https://beep-backend.vercel.app"
+  const apiUrl = "https://beep-backend.vercel.app";
 
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
   const [ad, setAd] = useState(null);
   const [allAds, setAllAds] = useState([]);
-  const [editAd, setEditAd] = useState(null);
+  const [relatedAds, setRelatedAds] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      fetchAds();
-      fetchAllAds();
-    }, 20000);
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(interval);
+    fetchAds();
+    fetchAllAds();
   }, []);
 
   const fetchAds = async () => {
     try {
       const response = await axios.get(`${apiUrl}/api/ads/user`, { withCredentials: true });
       setAds(response.data.ads);
-      // toast.success('Ads fetched successfully');
     } catch (error) {
       console.error('Failed to fetch ads', error);
-      // toast.error('Failed to fetch ads');
     }
   };
 
   const fetchAllAds = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${apiUrl}/api/ads/`, { withCredentials: true });
       setAllAds(response.data);
       setFilteredAds(response.data); // Initialize filteredAds
-      // toast.success('All ads fetched successfully');
+      setLoading(false);
     } catch (error) {
       console.error('Failed to fetch all ads', error.message);
       toast.error('Failed to fetch all ads');
+      setLoading(false);
     }
   };
 
-  const searchAds = (searchParams) => {
-    const { title, location, category } = searchParams;
-    const filtered = allAds?.filter(ad => {
-      const matchesTitle = title ? ad.title.toLowerCase().includes(title.toLowerCase()) : true;
-      const matchesLocation = location ? ad.location.toLowerCase().includes(location.toLowerCase()) : true;
-      const matchesCategory = category ? ad.category.toLowerCase() === category.toLowerCase() : true;
-      return matchesTitle && matchesLocation && matchesCategory;
-    });
+  const searchAds = (searchTerm) => {
+    const filtered = allAds.filter(ad => ad.adName.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredAds(filtered);
   };
 
-  const filterAds = (filters) => {
-    const filtered = allAds?.filter(ad => {
-      const productFilters = Object.keys(filters.product).filter(key => filters.product[key]);
-      const serviceFilters = Object.keys(filters.service).filter(key => filters.service[key]);
-      const otherFilters = Object.keys(filters.other).filter(key => filters.other[key]);
-
-      const matchesProduct = productFilters.length ? productFilters.includes(ad.category) : true;
-      const matchesService = serviceFilters.length ? serviceFilters.includes(ad.category) : true;
-      const matchesOther = otherFilters.length ? otherFilters.includes(ad.category) : true;
-
-      return matchesProduct || matchesService || matchesOther;
-    });
+  const filterAdsBySubcategory = (subcategory) => {
+    const filtered = allAds.filter(ad => ad.subcategory === subcategory);
     setFilteredAds(filtered);
   };
 
   const fetchAdById = async (id) => {
     try {
-      const response = await axios.get(`${apiUrl}/api/ads/${id}`, {
-        withCredentials: true,
-      });
+      setLoading(true);
+      const response = await axios.get(`${apiUrl}/api/ads/${id}`, { withCredentials: true });
       setAd(response.data);
-      toast.success('Ad fetched successfully');
-    } catch (error) {
-      console.error('Failed to fetch ad by id', error);
-      toast.error('Failed to fetch ad by id');
+
+      // Fetch related ads based on subcategory
+      const relatedAdsResponse = await axios.get(`${apiUrl}/api/ads`);
+      const relatedAds = relatedAdsResponse.data.filter(ad => ad.subcategory === response.data.subcategory && ad._id !== response.data._id);
+      setRelatedAds(relatedAds);
+
+      // Fetch user who posted the ad
+      if (response.data.user) {
+        fetchUserById(response.data.user);
+      }
+
+      setLoading(false);
+    } catch (err) {
+      console.error('Failed to fetch ad by id:', err);
+      setError('Failed to fetch ad');
+      setLoading(false);
+    }
+  };
+
+  const fetchUserById = async (userId) => {
+    try {
+      const response = await axios.get(`${apiUrl}/api/users/${userId}`);
+      setUser(response.data);
+    } catch (err) {
+      console.error('Failed to fetch user by id:', err);
     }
   };
 
@@ -92,7 +92,7 @@ const AdProvider = ({ children }) => {
     try {
       await axios.post(`${apiUrl}/api/ads`, adData, { withCredentials: true });
       fetchAllAds();
-      // toast.success('Ad created successfully');
+      toast.success('Ad created successfully');
     } catch (error) {
       console.error('Failed to create ad', error);
       toast.error('Failed to create ad');
@@ -122,7 +122,23 @@ const AdProvider = ({ children }) => {
   };
 
   return (
-    <AdContext.Provider value={{ ads, allAds, filteredAds, fetchAllAds, searchAds, filterAds, createAd, updateAd, ad, fetchAdById, deleteAd, setEditAd }}>
+    <AdContext.Provider value={{
+      ads,
+      filterAdsBySubcategory,
+      allAds,
+      filteredAds,
+      relatedAds,
+      fetchAdById,
+      user,
+      error,
+      loading,
+      fetchAllAds,
+      searchAds,
+      createAd,
+      updateAd,
+      ad,
+      deleteAd
+    }}>
       {children}
       <ToastContainer />
     </AdContext.Provider>
