@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from 'react';
 import { AdContext } from '../context/AdContext';
 
 const Home = () => {
-    const { allAds, loading } = useContext(AdContext);
+    const { allAds, loading} = useContext(AdContext);
     return (
         <>
             {/* <!-- header section end   -->
@@ -353,9 +353,7 @@ const Home = () => {
         <h2 className="text--heading-1 section__title">Our Popular Ads</h2>
         <div className="row">
           {loading ? (
-            <div className=' flex justify-center items-center '>njciyvcuvhvcjhvhvajhvhvhavh<svg class="animate-spin text-blue-300 h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-            
-          </svg></div> // You can replace this with a spinner or a loading component
+            <div className=' flex justify-center items-center h-[400px]'><h1 className=' text-4xl font-semibold' >Loading...</h1></div> // You can replace this with a spinner or a loading component
           ) : (
             allAds?.slice(0, 12).map((ad) => (
               <div className="col-xl-3 col-md-6" key={ad._id}>

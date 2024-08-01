@@ -30,11 +30,11 @@ const SingleAds = () => {
       }
     
       if (error) {
-        return <div className=' w-full h-[400px] text-center text-4xl font-bold '>{error}</div>;
+        return <div className=' w-full h-[400px] text-center text-4xl font-bold '>Something Went Wrong, Refresh this page</div>;
       }
     
       if (!ad) {
-        return <div>No ad found</div>;
+        return <div className=' w-full h-[400px] text-center text-4xl font-bold '>No ad found, Refresh this page</div>;
       }
     // console.log(ad)
     return (

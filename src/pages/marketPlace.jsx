@@ -23,7 +23,7 @@ const MarketPlace = () => {
     }
 
     if (error) {
-        return <div className=' w-full h-[400px] text-center text-4xl font-bold '>{error}</div>;
+        return <div className=' w-full h-[400px] text-center text-4xl font-bold '>Something went wrong, Refesh this page</div>;
     }
 
     return (
@@ -55,7 +55,7 @@ const MarketPlace = () => {
                         </select>
                     </div>
                     {!filteredAds.length ?
-                        <div className=' flex justify-center items-center h-[400px]'><h1 className=' text-4xl font-semibold'> No ad found :)</h1></div> :
+                        <div className=' flex justify-center items-center h-[400px]'><h1 className=' text-4xl font-semibold'> No ad found, Refresh this page:)</h1></div> :
                         <div className="row">
                             {filteredAds.map((ad) => (
                                 <div className="col-xl-3 col-md-6" key={ad._id}>
