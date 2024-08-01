@@ -7,8 +7,9 @@ const Footer = () => {
         <div className="container">
             <div className="row">
                 <div className="col-xl-3">
-                    <div className="footer__brand-logo">
-                        <img src="/src/images/logo.png" alt="logo-brand" />
+                    <div className="footer__brand-logo flex items-center gap-3">
+                        <img src="/assets/css/shopping-online.png" alt="logo-brand" />
+                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Beep</span>
                     </div>
                     <div className="footer__loc-info">
                         <p className="text--body-3">

@@ -6,7 +6,7 @@ const Navbar = () => {
             <nav class="bg-white border-gray-200 py-2.5 sticky top-10 dark:bg-gray-900">
                 <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
                     <a href="#" class="flex items-center">
-                        <img src="/assets/css/shopping-online.png" class="h-6 mr-3 sm:h-9" alt="Landwind Logo" />
+                        <img src="/assets/css/shopping-online.png" class="h-6 mr-3 sm:h-9" alt="beep Logo" />
                         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Beep</span>
                     </a>
                     <div class="flex items-center lg:order-2">
