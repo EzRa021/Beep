@@ -1,42 +1,42 @@
-
 import React, { useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { AdContext } from '../context/AdContext';
-import Loader from "../components/loader"
-import { Link } from 'react-router-dom';
+import Loader from "../components/loader";
+
 const SingleAds = () => {
     const { id } = useParams();
+    const navigate = useNavigate(); // Initialize useNavigate
     const { ad, fetchAdById, relatedAds, user, error, loading } = useContext(AdContext);
+
     function getLinkWhatsApp(number, message) {
         const url = 'https://api.whatsapp.com/send?phone=' + number + '&text=' + encodeURIComponent(message);
         return url;
     }
 
-
     const handleSendMessage = () => {
         const whatsappUrl = getLinkWhatsApp(ad?.phoneNumber, ` Hello, I am interested in your ${ad.category} ${ad.adName}.`);
         window.open(whatsappUrl, '_blank');
-
     }
+
     useEffect(() => {
         fetchAdById(id);
     }, [id]);
 
-    // console.log(user)
-
-
     if (loading) {
         return <div><Loader /></div>;
-      }
-    
-      if (error) {
+    }
+
+    if (error) {
         return <div className=' w-full h-[400px] text-center text-4xl font-bold '>Something Went Wrong, Refresh this page</div>;
-      }
-    
-      if (!ad) {
+    }
+
+    if (!ad) {
         return <div className=' w-full h-[400px] text-center text-4xl font-bold '>No ad found, Refresh this page</div>;
-      }
-    // console.log(ad)
+    }
+
+    const handleRelatedAdClick = (relatedAdId) => {
+        navigate(`/single-ad/${relatedAdId}`);
+    }
     return (
         <div>
 
@@ -110,15 +110,15 @@ const SingleAds = () => {
                             </div>
                             <div className=' mt-5' >
                                 {/* <div> */}
-                                    <div className=' grid gap-3 lg:grid-cols-4 content-center '>
-                                        {
-                                            ad.images?.map((image, index) => (
-                                                <div class="product-item__slider-item">
-                                                    <img src={image} alt={index} />
-                                                </div>
-                                            ))
-                                        }
-                                    </div>
+                                <div className=' grid gap-3 lg:grid-cols-4 content-center '>
+                                    {
+                                        ad.images?.map((image, index) => (
+                                            <div class="product-item__slider-item w-[150px] h-[100px]">
+                                                <img className=' object-cover w-full' src={image} alt={index} />
+                                            </div>
+                                        ))
+                                    }
+                                </div>
 
                                 {/* </div> */}
                                 <div className=' w-full mt-3 h-[400px]'>
@@ -161,7 +161,7 @@ const SingleAds = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-xl-4 shadow-lg rounded-lg">
+                        <div class="col-xl-4 shadow-md rounded-lg">
                             <div class="product-item__sidebar py-4">
                                 <div class="product-item__sidebar-top">
                                     <div class="product-item__sidebar-item product-price">
@@ -239,8 +239,8 @@ const SingleAds = () => {
 
                                             <span class="text--body-4 message">Phone number revealed.</span>
                                         </div>
-                                        <a onClick={handleSendMessage} class="btn w-100">
-                                            <span class="icon--left">
+                                        <a onClick={handleSendMessage} class=" flex items-center rounded-lg gap-3 justify-center w-full px-2 py-3 bg-blue-600">
+                                            <span class="">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M4.25895 16.5939C3.14076 14.7089 2.74916 12.4805 3.15768 10.3272C3.56621 8.1739 4.74675 6.2438 6.47764 4.89933C8.20853 3.55486 10.3707 2.8885 12.5581 3.02539C14.7455 3.16227 16.8078 4.09298 18.3575 5.64274C19.9073 7.19251 20.838 9.25472 20.9749 11.4421C21.1118 13.6296 20.4455 15.7917 19.101 17.5226C17.7565 19.2535 15.8264 20.4341 13.6732 20.8426C11.5199 21.2511 9.29149 20.8596 7.40649 19.7414L7.40651 19.7413L4.29808 20.6294C4.16947 20.6662 4.03338 20.6678 3.90391 20.6343C3.77443 20.6007 3.65628 20.5332 3.5617 20.4386C3.46713 20.344 3.39956 20.2259 3.36601 20.0964C3.33246 19.9669 3.33415 19.8308 3.37089 19.7022L4.25901 16.5938L4.25895 16.5939Z"
@@ -269,7 +269,10 @@ const SingleAds = () => {
                                                     />
                                                 </svg>
                                             </span>
-                                            Send Message
+                                            <div className=' hover:text-black'>
+                                                Send Message
+                                            </div>
+
                                         </a>
                                     </div>
                                     <div class="product-item__sidebar-item user-details">
@@ -348,8 +351,8 @@ const SingleAds = () => {
                                                         />
                                                     </svg>
                                                 </span>
-                                                <a href={ad.websiteLink} class="text--body-3">
-                                                    {ad.websiteLink}
+                                                <a href={ad.websiteLink} class="text--body-3 flex items-center gap-2">
+                                                    <p> {ad.websiteLink}</p>
                                                     <span class="icon">
                                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M15.1875 7.03125L15.1869 2.81306L10.9688 2.8125" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
@@ -389,7 +392,6 @@ const SingleAds = () => {
                                                 ad.overview?.map((data) => (
                                                     <li class="overview-details__item">
                                                         <span class="text--body-3 title">{data}</span>
-                                                        <span class="text--body-3 info">Used</span>
                                                     </li>
                                                 ))
                                             }
@@ -566,51 +568,51 @@ const SingleAds = () => {
                             </button>
                         </div>
                     </div>
-                    <div class=" grid-cols-3 grid gap-4" id="relatedPostSlider">
+                    <div className="lg:grid-cols-3 px-2 grid-cols-2 grid lg:gap-4 gap-2" id="relatedPostSlider">
                         {relatedAds?.map((relatedAd) => (
                             <div className="" key={relatedAd._id}>
-                                <div className="cards cards--one cards--highlight">
-                                    <Link to={`single-ad/${relatedAd._id}`} className="cards__img-wrapper">
+                                <div className="cards cards--one cards--highlight" onClick={() => handleRelatedAdClick(relatedAd._id)}>
+                                    <div className="cards__img-wrapper">
                                         <img src={relatedAd.images[0]} alt="card-img" className="img-fluid" />
-                                    </Link>
+                                    </div>
                                     <div className="cards__info">
                                         <div className="cards__info-top">
                                             <h6 className="text--body-4 cards__category-title">
                                                 <span className="icon">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M2 11L8 14.5L14 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M2 8L8 11.5L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        <path d="M2 11L8 14.5L14 11" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                        <path d="M2 8L8 11.5L14 8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                        <path d="M2 5L8 8.5L14 5L8 1.5L2 5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
                                                     </svg>
                                                 </span>
                                                 {relatedAd.category}
                                             </h6>
-                                            <Link to={`/single-ad/${relatedAd._id}`} className="text--body-3-600 cards__caption-title">
+                                            <div className="text--body-3-600 cards__caption-title">
                                                 {relatedAd.adName}
-                                            </Link>
+                                            </div>
                                         </div>
                                         <div className="cards__info-bottom">
-                                            <h6 className="cards__location text--body-4">
+                                            <div className=" flex justify-between line-clamp-1">
                                                 <span className="icon">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M10 10.625C11.3807 10.625 12.5 9.50571 12.5 8.125C12.5 6.74429 11.3807 5.625 10 5.625C8.61929 5.625 7.5 6.74429 7.5 8.125C7.5 9.50571 8.61929 10.625 10 10.625Z"
                                                             stroke="#27C200"
-                                                            stroke-width="1.2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
+                                                            strokeWidth="1.2"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
                                                         ></path>
                                                         <path
                                                             d="M16.25 8.125C16.25 13.75 10 18.125 10 18.125C10 18.125 3.75 13.75 3.75 8.125C3.75 6.4674 4.40848 4.87769 5.58058 3.70558C6.75269 2.53348 8.3424 1.875 10 1.875C11.6576 1.875 13.2473 2.53348 14.4194 3.70558C15.5915 4.87769 16.25 6.4674 16.25 8.125V8.125Z"
                                                             stroke="#27C200"
-                                                            stroke-width="1.2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
+                                                            strokeWidth="1.2"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
                                                         ></path>
                                                     </svg>
                                                 </span>
-                                                {relatedAd.location}
-                                            </h6>
+                                            <p className=' text-sm line-clamp-1'>{relatedAd.location}</p>  
+                                            </div>
                                             <span className="cards__price-title text--body-3-600">{relatedAd.price}</span>
                                         </div>
                                     </div>

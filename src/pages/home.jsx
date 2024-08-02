@@ -351,12 +351,12 @@ const Home = () => {
     <section className="section recent-post">
       <div className="container">
         <h2 className="text--heading-1 section__title">Our Popular Ads</h2>
-        <div className="row">
+        <div className=" grid lg:grid-cols-4 gap-3 grid-cols-2">
           {loading ? (
             <div className=' flex justify-center items-center h-[400px]'><h1 className=' text-4xl font-semibold' >Loading...</h1></div> // You can replace this with a spinner or a loading component
           ) : (
             allAds?.slice(0, 12).map((ad) => (
-              <div className="col-xl-3 col-md-6" key={ad._id}>
+              <div className="" key={ad._id}>
                 <div className="cards cards--one cards--highlight">
                   <Link to={`single-ad/${ad._id}`} className="cards__img-wrapper">
                     <img src={ad.images[0]} alt="card-img" className="img-fluid" />

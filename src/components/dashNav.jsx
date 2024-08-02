@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const DashNav = () => {
   const { logout } = useContext(AuthContext);
   const { user } = useContext(UserContext);
-  console.log(user)
+  // console.log(user)
 
 
   return (
