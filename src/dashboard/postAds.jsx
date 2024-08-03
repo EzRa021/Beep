@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const PostAds = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { createAd } = useContext(AdContext);
+  const { createAd, loading } = useContext(AdContext);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -68,6 +68,7 @@ const PostAds = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const adData = new FormData();
     for (const key in formData) {
       if (key === 'overview') {
@@ -82,7 +83,7 @@ const PostAds = () => {
       adData.append('images', images[i]);
     }
     adData.append('features', JSON.stringify(features)); // Convert features to JSON string
-  
+
     try {
       await createAd(adData);
       onOpen();
@@ -90,7 +91,7 @@ const PostAds = () => {
       toast.error(error.message || 'An error occurred while posting the ad.');
     }
   };
-  
+
   const handleModalClose = () => {
     onOpenChange(false);
     navigate('/my-ads');
@@ -177,40 +178,15 @@ const PostAds = () => {
                   <h3 className="text-xl font-bold mb-4">Step 2: Description and Images</h3>
                   <form onSubmit={(e) => { e.preventDefault(); setStep(3); }}>
                     <div className="mb-4">
-                      <label className="block text-gray-700 mb-2" htmlFor="description">Ad Description</label>
+                      <label className="block text-gray-700 mb-2" htmlFor="description">Description</label>
                       <textarea className="w-full px-3 py-2 border rounded" name="description" id="description" value={formData.description} onChange={handleChange}></textarea>
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 mb-2" htmlFor="features">Features <span className="text-gray-500">(optional)</span></label>
-                      <div className="flex">
-                        <input className="w-full px-3 py-2 border rounded" type="text" name="feature" id="feature" value={featureInput} onChange={handleFeatureChange} />
-                        <button type="button" className="px-4 py-2 bg-blue-500 text-white rounded ml-2 hover:bg-blue-600" onClick={addFeature}>Add</button>
-                      </div>
-                      <div className="mt-2">
-                        {features.map((feature, index) => (
-                          <div key={index} className="flex items-center">
-                            <span className="text-gray-700">{feature}</span>
-                            <button className="ml-2 text-red-500" onClick={() => removeFeature(index)}>Remove</button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-gray-700 mb-2">Upload Photos</label>
-                      <input type="file" multiple onChange={handleImageChange} />
-                      <div className="flex flex-wrap mt-4">
-                        {Array.from(images).map((image, index) => (
-                          <div key={index} className="relative w-24 h-24 mr-2 mb-2">
-                            <img src={URL.createObjectURL(image)} alt="Uploaded" className="w-full h-full object-cover rounded" />
-                            <button className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full" onClick={() => setImages(Array.from(images).filter((_, i) => i !== index))}>
-                              &times;
-                            </button>
-                          </div>
-                        ))}
-                      </div>
+                      <label className="block text-gray-700 mb-2" htmlFor="images">Images</label>
+                      <input className="w-full px-3 py-2 border rounded" type="file" name="images" id="images" onChange={handleImageChange} multiple />
                     </div>
                     <div className="flex justify-between">
-                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(1)}>Previous</button>
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(1)}>Previous Step</button>
                       <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(3)}>Next Step</button>
                     </div>
                   </form>
@@ -218,39 +194,72 @@ const PostAds = () => {
               )}
               {step === 3 && (
                 <div>
-                  <h3 className="text-xl font-bold mb-4">Step 3: Contact Information</h3>
-                  <form onSubmit={handleSubmit}>
+                  <h3 className="text-xl font-bold mb-4">Step 3: Contact Info</h3>
+                  <form onSubmit={(e) => { e.preventDefault(); setStep(4); }}>
                     <div className="mb-4">
                       <label className="block text-gray-700 mb-2" htmlFor="phoneNumber">Phone Number</label>
-                      <input className="w-full px-3 py-2 border rounded" type="tel" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 mb-2" htmlFor="backupPhoneNumber">Backup Phone Number <span className="text-gray-500">(optional)</span></label>
-                      <input className="w-full px-3 py-2 border rounded" type="tel" name="backupPhoneNumber" id="backupPhoneNumber" value={formData.backupPhoneNumber} onChange={handleChange} />
+                      <label className="block text-gray-700 mb-2" htmlFor="backupPhoneNumber">Backup Phone Number</label>
+                      <input className="w-full px-3 py-2 border rounded" type="text" name="backupPhoneNumber" id="backupPhoneNumber" value={formData.backupPhoneNumber} onChange={handleChange} />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 mb-2" htmlFor="email">Email Address</label>
+                      <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
                       <input className="w-full px-3 py-2 border rounded" type="email" name="email" id="email" value={formData.email} onChange={handleChange} />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 mb-2" htmlFor="websiteLink">Website Link <span className="text-gray-500">(optional)</span></label>
+                      <label className="block text-gray-700 mb-2" htmlFor="websiteLink">Website Link</label>
                       <input className="w-full px-3 py-2 border rounded" type="text" name="websiteLink" id="websiteLink" value={formData.websiteLink} onChange={handleChange} />
                     </div>
+                    <div className="flex justify-between">
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Previous Step</button>
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(4)}>Next Step</button>
+                    </div>
+                  </form>
+                </div>
+              )}
+              {step === 4 && (
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Step 4: Location and Map</h3>
+                  <form onSubmit={(e) => { e.preventDefault(); setStep(5); }}>
                     <div className="mb-4">
                       <label className="block text-gray-700 mb-2" htmlFor="location">Location</label>
                       <input className="w-full px-3 py-2 border rounded" type="text" name="location" id="location" value={formData.location} onChange={handleChange} />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-gray-700 mb-2" htmlFor="mapLocation">Map Location <span className="text-gray-500">(optional)</span></label>
+                      <label className="block text-gray-700 mb-2" htmlFor="mapLocation">Map Location</label>
                       <input className="w-full px-3 py-2 border rounded" type="text" name="mapLocation" id="mapLocation" value={formData.mapLocation} onChange={handleChange} />
                     </div>
-                    <div className="flex items-center mb-4">
-                      <input type="checkbox" className="mr-2" id="saveContact" />
-                      <label htmlFor="saveContact" className="text-gray-700">Save my contact information for faster posting</label>
+                    <div className="flex justify-between">
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(3)}>Previous Step</button>
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(5)}>Next Step</button>
+                    </div>
+                  </form>
+                </div>
+              )}
+              {step === 5 && (
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Step 5: Features and Submit</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 mb-2" htmlFor="features">Features</label>
+                      <div className="flex mb-2">
+                        <input className="w-full px-3 py-2 border rounded" type="text" name="featureInput" id="featureInput" value={featureInput} onChange={handleFeatureChange} />
+                        <button type="button" className="px-4 py-2 bg-blue-500 text-white rounded ml-2" onClick={addFeature}>Add</button>
+                      </div>
+                      <ul className="list-disc list-inside">
+                        {features.map((feature, index) => (
+                          <li key={index} className="flex justify-between items-center mb-2">
+                            <span>{feature}</span>
+                            <button type="button" className="px-2 py-1 bg-red-500 text-white rounded" onClick={() => removeFeature(index)}>Remove</button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                     <div className="flex justify-between">
-                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(2)}>Previous</button>
-                      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Post Ad</button>
+                      <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setStep(4)}>Previous Step</button>
+                      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" disabled={loading}>{loading ? 'Posting...' : 'Submit Ad'}</button>
                     </div>
                   </form>
                 </div>
@@ -259,29 +268,16 @@ const PostAds = () => {
           </div>
         </div>
       </section>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+
+      <Modal isOpen={isOpen} onOpenChange={handleModalClose} backdrop="blur">
         <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Ad Posted Successfully</ModalHeader>
-              <ModalBody>
-                <div className="text-center">
-                  <div className="mb-4">
-                    <svg className="w-20 h-20 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7 17h10M7 10h.01M3 6h18" />
-                    </svg>
-                  </div>
-                  <h2 className="text-xl font-bold">Your ad has been successfully posted!</h2>
-                  <p className="text-gray-600">Congratulations! Your ad is now live and visible to your target audience.</p>
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={handleModalClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
+          <ModalHeader>Ad Posted Successfully</ModalHeader>
+          <ModalBody>
+            <p>Your ad has been posted successfully. You can view it in your ads list.</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={handleModalClose}>Close</Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </div>

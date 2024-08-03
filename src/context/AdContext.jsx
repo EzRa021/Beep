@@ -26,10 +26,13 @@ const AdProvider = ({ children }) => {
 
   const fetchAds = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${apiUrl}/api/ads/user`, { withCredentials: true });
       setAds(response.data.ads);
+      setLoading(false);
     } catch (error) {
       console.error('Failed to fetch ads', error);
+      setLoading(false);
     }
   };
 
@@ -92,23 +95,29 @@ const AdProvider = ({ children }) => {
 
   const createAd = async (adData) => {
     try {
+      setLoading(true);
       await axios.post(`${apiUrl}/api/ads`, adData, { withCredentials: true });
       fetchAllAds();
       toast.success('Ad created successfully');
+      setLoading(false);
     } catch (error) {
       console.error('Failed to create ad', error);
       toast.error('Failed to create ad');
+      setLoading(false);
     }
   };
 
   const updateAd = async (id, adData) => {
     try {
+      setLoading(true);
       await axios.put(`${apiUrl}/api/ads/${id}`, adData, { withCredentials: true });
       fetchAllAds();
       toast.success('Ad updated successfully');
+      setLoading(false);
     } catch (error) {
       console.error('Failed to update ad', error);
       toast.error('Failed to update ad');
+      setLoading(false);
     }
   };
 

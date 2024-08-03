@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AdContext } from '../context/AdContext';
 import BreedCrumb from '../components/breedCrumb';
 import Loader from '../components/loader';
@@ -70,31 +70,6 @@ const AdDetails = () => {
     setFormData({ ...formData, images: updatedImages });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const updatedAdData = new FormData();
-    for (const key in formData) {
-      if (key === 'tags' || key === 'features') {
-        updatedAdData.append(key, formData[key].split(', '));
-      } else {
-        updatedAdData.append(key, formData[key]);
-      }
-    }
-    for (let i = 0; i < newImages.length; i++) {
-      updatedAdData.append('images', newImages[i]);
-    }
-    try {
-      await updateAd(id, updatedAdData);
-      setLoading(false);
-      onOpenChange(false);
-      setSuccessModalOpen(true);
-    } catch (error) {
-      console.error('Failed to update ad', error);
-      setLoading(false);
-    }
-  };
-
   if (error) {
     return <div>{error}</div>;
   }
@@ -102,6 +77,7 @@ const AdDetails = () => {
   if (!ad) {
     return <div><Loader /></div>;
   }
+  console.log(ad)
 
   return (
     <div>
@@ -169,7 +145,7 @@ const AdDetails = () => {
                       ))}
                     </ul>
                   </div>
-                  <Button className="btn mt-4" onPress={onOpen} color="primary">Edit Ad</Button>
+                  <Button className="btn mt-4" onPress={() => onOpenChange(true)} color="primary">Edit Ad</Button>
                   <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
                     <ModalContent>
                       {(onClose) => (
@@ -214,77 +190,76 @@ const AdDetails = () => {
                                     </div>
                                     <div className="mb-4">
                                       <label className="block text-gray-700 mb-2" htmlFor="price">Price</label>
-                                      <Input className="w-full px-3 py-2 border rounded" type="number" name="price" id="price" value={formData.price} onChange={handleChange} />
-                                    </div>
-                                    <div className="flex justify-between">
-                                      <Button color="primary" variant="flat" onPress={() => setStep(2)}>Next Step</Button>
+                                      <Input className="w-full px-3 py-2 border rounded" type="text" name="price" id="price" value={formData.price} onChange={handleChange} />
                                     </div>
                                   </div>
                                 )}
                                 {step === 2 && (
                                   <div>
-                                    <h3 className="text-xl font-bold mb-4">Step 2: Description and Images</h3>
+                                    <h3 className="text-xl font-bold mb-4">Step 2: Contact Info</h3>
                                     <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="description">Ad Description</label>
-                                      <textarea className="w-full px-3 py-2 border rounded" name="description" id="description" value={formData.description} onChange={handleChange}></textarea>
+                                      <label className="block text-gray-700 mb-2" htmlFor="description">Description</label>
+                                      <textarea className="w-full px-3 py-2 border rounded" name="description" id="description" rows="4" value={formData.description} onChange={handleChange}></textarea>
                                     </div>
                                     <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="features">Features <span className="text-gray-500">(optional)</span></label>
-                                      <textarea className="w-full px-3 py-2 border rounded" name="features" id="features" value={formData.features} onChange={handleChange}></textarea>
+                                      <label className="block text-gray-700 mb-2" htmlFor="features">Features</label>
+                                      <Input className="w-full px-3 py-2 border rounded" type="text" name="features" id="features" value={formData.features} onChange={handleChange} />
                                     </div>
                                     <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2">Upload Photos</label>
-                                      <Input type="file" multiple onChange={handleImageChange} />
-                                      <div className="flex flex-wrap mt-4">
-                                        {formData.images.map((image, index) => (
-                                          <div key={index} className="relative w-24 h-24 mr-2 mb-2">
-                                            <img src={image} alt={`Uploaded ${index}`} className="w-full h-full object-cover rounded" />
-                                            <Button className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full" onClick={() => handleRemoveImage(index)}>
-                                              &times;
-                                            </Button>
-                                          </div>
-                                        ))}
-                                      </div>
+                                      <label className="block text-gray-700 mb-2" htmlFor="phoneNumber">Phone Number</label>
+                                      <Input className="w-full px-3 py-2 border rounded" type="text" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
                                     </div>
-                                    <div className="flex justify-between">
-                                      <Button color="primary" variant="flat" onPress={() => setStep(1)}>Previous</Button>
-                                      <Button color="primary" variant="flat" onPress={() => setStep(3)}>Next Step</Button>
+                                    <div className="mb-4">
+                                      <label className="block text-gray-700 mb-2" htmlFor="backupPhoneNumber">Backup Phone Number</label>
+                                      <Input className="w-full px-3 py-2 border rounded" type="text" name="backupPhoneNumber" id="backupPhoneNumber" value={formData.backupPhoneNumber} onChange={handleChange} />
+                                    </div>
+                                    <div className="mb-4">
+                                      <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
+                                      <Input className="w-full px-3 py-2 border rounded" type="email" name="email" id="email" value={formData.email} onChange={handleChange} />
+                                    </div>
+                                    <div className="mb-4">
+                                      <label className="block text-gray-700 mb-2" htmlFor="websiteLink">Website Link</label>
+                                      <Input className="w-full px-3 py-2 border rounded" type="text" name="websiteLink" id="websiteLink" value={formData.websiteLink} onChange={handleChange} />
                                     </div>
                                   </div>
                                 )}
                                 {step === 3 && (
                                   <div>
-                                    <h3 className="text-xl font-bold mb-4">Step 3: Contact Information</h3>
-                                    <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="phoneNumber">Phone Number</label>
-                                      <Input className="w-full px-3 py-2 border rounded" type="tel" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-                                    </div>
-                                    <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="backupPhoneNumber">Backup Phone Number <span className="text-gray-500">(optional)</span></label>
-                                      <Input className="w-full px-3 py-2 border rounded" type="tel" name="backupPhoneNumber" id="backupPhoneNumber" value={formData.backupPhoneNumber} onChange={handleChange} />
-                                    </div>
-                                    <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="email">Email Address</label>
-                                      <Input className="w-full px-3 py-2 border rounded" type="email" name="email" id="email" value={formData.email} onChange={handleChange} />
-                                    </div>
-                                    <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="websiteLink">Website Link <span className="text-gray-500">(optional)</span></label>
-                                      <Input className="w-full px-3 py-2 border rounded" type="text" name="websiteLink" id="websiteLink" value={formData.websiteLink} onChange={handleChange} />
-                                    </div>
+                                    <h3 className="text-xl font-bold mb-4">Step 3: Location Info</h3>
                                     <div className="mb-4">
                                       <label className="block text-gray-700 mb-2" htmlFor="location">Location</label>
                                       <Input className="w-full px-3 py-2 border rounded" type="text" name="location" id="location" value={formData.location} onChange={handleChange} />
                                     </div>
                                     <div className="mb-4">
-                                      <label className="block text-gray-700 mb-2" htmlFor="mapLocation">Map Location <span className="text-gray-500">(optional)</span></label>
+                                      <label className="block text-gray-700 mb-2" htmlFor="mapLocation">Map Location</label>
                                       <Input className="w-full px-3 py-2 border rounded" type="text" name="mapLocation" id="mapLocation" value={formData.mapLocation} onChange={handleChange} />
                                     </div>
-                                    <div className="flex items-center mb-4">
-                                      <Checkbox className="mr-2" id="saveContact">Save my contact information for faster posting</Checkbox>
-                                    </div>
-                                    <div className="flex justify-between">
-                                      <Button color="primary" variant="flat" onPress={() => setStep(2)}>Previous</Button>
-                                      <Button color="primary" onPress={handleSubmit}>Update Ad</Button>
+                                    <div className="mb-4">
+                                      <label className="block text-gray-700 mb-2" htmlFor="images">Images</label>
+                                      <input className="w-full px-3 py-2 border rounded" type="file" name="images" id="images" onChange={handleImageChange} multiple />
+                                      {newImages.length > 0 && (
+                                        <div className="mt-2">
+                                          <p className="text-sm text-gray-600">New images to be uploaded:</p>
+                                          <ul>
+                                            {newImages.map((file, index) => (
+                                              <li key={index}>{file.name}</li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                      {formData.images.length > 0 && (
+                                        <div className="mt-4">
+                                          <p className="text-sm text-gray-600">Current images:</p>
+                                          <ul>
+                                            {formData.images.map((image, index) => (
+                                              <li key={index}>
+                                                <img src={image} alt={`Ad Image ${index + 1}`} className="w-16 h-16 object-cover inline-block mr-2" />
+                                                <button className="text-red-600" onClick={() => handleRemoveImage(index)}>Remove</button>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
                                 )}
@@ -292,29 +267,44 @@ const AdDetails = () => {
                             )}
                           </ModalBody>
                           <ModalFooter>
-                            <Button color="danger" variant="flat" onPress={onClose}>Close</Button>
+                            {step > 1 && <Button color="primary" variant="light" onClick={() => setStep(step - 1)}>Previous</Button>}
+                            {step < 3 ? (
+                              <Button color="primary" onClick={() => setStep(step + 1)}>Next</Button>
+                            ) : (
+                              <Button
+                                color="primary"
+                                onPress={() => {
+                                  setLoading(true);
+                                  const updatedFormData = {
+                                    ...formData,
+                                    tags: formData.tags.split(',').map(tag => tag.trim()),
+                                    features: formData.features.split(',').map(feature => feature.trim()),
+                                  };
+                                  updateAd(id, updatedFormData, newImages)
+                                    .then(() => {
+                                      setSuccessModalOpen(true);
+                                      onClose();
+                                    })
+                                    .catch((err) => {
+                                      console.error(err);
+                                    })
+                                    .finally(() => {
+                                      setLoading(false);
+                                    });
+                                }}
+                              >
+                                {loading ? <div role=" flex items-center gap-2 justify-center w-fit h-fit">
+                                  <svg aria-hidden="true" class="inline w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                                  </svg>
+                                  <p class="">Updating ad</p>
+                                </div> : "Update ad"}
+                              </Button>
+                            )}
                           </ModalFooter>
                         </>
                       )}
-                    </ModalContent>
-                  </Modal>
-                  <Modal isOpen={successModalOpen} onOpenChange={setSuccessModalOpen}>
-                    <ModalContent>
-                      <ModalHeader className="flex flex-col gap-1">Ad Updated Successfully</ModalHeader>
-                      <ModalBody>
-                        <div className="text-center">
-                          <div className="mb-4">
-                            <svg className="w-20 h-20 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7 17h10M7 10h.01M3 6h18" />
-                            </svg>
-                          </div>
-                          <h2 className="text-xl font-bold">Your ad has been successfully updated!</h2>
-                          <p className="text-gray-600">Congratulations! Your ad has been updated and is now live and visible to your target audience.</p>
-                        </div>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button color="primary" onPress={() => setSuccessModalOpen(false)}>Close</Button>
-                      </ModalFooter>
                     </ModalContent>
                   </Modal>
                 </div>
