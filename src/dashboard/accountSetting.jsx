@@ -6,8 +6,8 @@ import BreedCrumb from '../components/breedCrumb';
 import { toast, ToastContainer } from 'react-toastify';
 
 const AccountSettings = () => {
-  const apiUrl = "http://localhost:3000/api"; // Ensure the base URL is correct
-  // const apiUrl = "https://beep-backend.vercel.app"
+  // const apiUrl = "http://localhost:3000/api"; // Ensure the base URL is correct
+  const apiUrl = "https://beep-backend.vercel.app"
 
   
   const { user, setUser } = useContext(UserContext);
