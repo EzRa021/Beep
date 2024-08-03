@@ -12,7 +12,7 @@ const BreedCrumb = ({pageTitle, currentPage, greeting, user}) => {
                     <h2 className="breedcrumb__title text--heading-2">{pageTitle}</h2>
                     <ul className="breedcrumb__page">
                         <li className="breedcrumb__page-item">
-                            <a href="index.html" className="breedcrumb__page-link text--body-3">Overview</a>
+                            <a href="/overview" className="breedcrumb__page-link text--body-3">Overview</a>
                         </li>
                         <li className="breedcrumb__page-item">
                             <a href="#" className="breedcrumb__page-link text--body-3">/</a>

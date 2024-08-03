@@ -42,7 +42,7 @@ const AppContent = () => {
   }, [setUser]);
 
   if (loading) {
-    return <div><Loader/></div>; // Or a spinner/loading indicator
+    return <div><Loader /></div>; // Or a spinner/loading indicator
   }
 
   if (!user && isDashboardPath) {
@@ -78,14 +78,14 @@ const AppContent = () => {
 function App() {
   return (
     <Router>
-       <ToastContainer />
-      <UserProvider>
-        <AdProvider>
-          <AuthProvider>
+      <ToastContainer />
+      <AuthProvider>
+        <UserProvider>
+          <AdProvider>
             <AppContent />
-          </AuthProvider>
-        </AdProvider>
-      </UserProvider>
+          </AdProvider>
+        </UserProvider>
+      </AuthProvider>
     </Router>
   );
 }

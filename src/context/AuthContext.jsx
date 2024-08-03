@@ -1,4 +1,3 @@
-// AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  // const apiUrl = "https://beep-backend.vercel.app";
+  const apiUrl = "http://localhost:3000";
 
-    // const apiUrl = "http://localhost:3000"
-  const apiUrl = "https://beep-backend.vercel.app"
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -29,7 +28,6 @@ export const AuthProvider = ({ children }) => {
         console.error('Not authenticated', error);
         setUser(null);
         localStorage.removeItem('user');
-        toast.error('User not authenticated');
       }
     };
 

@@ -102,7 +102,7 @@ const PostAds = () => {
       <section className="py-8">
         <div className="container mx-auto flex">
           <DashNav />
-          <div className="w-full lg:w-3/4 px-4">
+          <div className="w-full lg:w-3/4 lg:px-4 px-2">
             <div className="bg-white rounded-lg shadow-lg p-6">
               {step === 1 && (
                 <div>
