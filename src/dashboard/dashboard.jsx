@@ -31,7 +31,7 @@ const DashboardPage = () => {
                         <div className="">
                             <div className="dashboard__count-card row">
                                 <div className="col-lg-4">
-                                    <div className="dashboard-card dashboard-card--count bgcolor--primary-9">
+                                    <div className="dashboard-card dashboard-card--count w-full bgcolor--primary-9">
                                         <div className="dashboard-card--count__info">
                                             <span className="counter-number text--heading-2">{ads?.length}</span>
                                             <h2 className="counter-title text--body-3">Posted Ads</h2>
@@ -61,7 +61,7 @@ const DashboardPage = () => {
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
-                                    <div className="dashboard-card dashboard-card--count bgcolor--success-9">
+                                    <div className="dashboard-card dashboard-card--count w-full bgcolor--success-9">
                                         <div className="dashboard-card--count__info">
                                             <span className="counter-number text--heading-2">{favouriteAdsCount}</span>
                                             <h2 className="counter-title text--body-3">Favourite Ads</h2>
