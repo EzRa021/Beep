@@ -9,7 +9,7 @@ import { AdContext } from '../context/AdContext';
 import { AuthContext } from '../context/AuthContext';
 const DashboardPage = () => {
 
-    const {ads,} = useContext(AdContext);
+    const {ads} = useContext(AdContext);
     const {user} = useContext(AuthContext)
     const favouriteAdsCount = ads?.filter(ad => ad.liked==true).length;
 
