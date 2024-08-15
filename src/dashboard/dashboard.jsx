@@ -9,16 +9,16 @@ import { AdContext } from '../context/AdContext';
 import { AuthContext } from '../context/AuthContext';
 const DashboardPage = () => {
 
-    const {ads, fetchAds} = useContext(AdContext);
+    const {ads,} = useContext(AdContext);
     const {user} = useContext(AuthContext)
     const favouriteAdsCount = ads?.filter(ad => ad.liked==true).length;
 
   const [recentAds, setRecentAds] = useState([]);
 
-      useEffect(() => {
-        // Fetch the latest ads whenever the component mounts
-        fetchAds(); 
-    }, []); // Empty dependency array to trigger only on component mount
+    //   useEffect(() => {
+    //     // Fetch the latest ads whenever the component mounts
+    //     fetchAds(); 
+    // }, []); // Empty dependency array to trigger only on component mount
 
 
   useEffect(() => {
